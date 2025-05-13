@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 public class Attendance {
     private String id;
-    private Integer courseId;
-    private Integer studentId;
+    private String courseId;
+    private String studentId;
     private String type;
     private String date;
 

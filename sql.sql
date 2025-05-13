@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `s_course`;
 CREATE TABLE `s_course` (
   `id` VARCHAR(32) PRIMARY KEY ,
   `name` varchar(32) NOT NULL,
-  `teacher_id` int(5) NOT NULL,
+  `teacher_id` VARCHAR(32) NOT NULL,
   `course_date` varchar(32) DEFAULT NULL,
   `selected_num` int(5) NOT NULL DEFAULT '0',
   `max_num` int(5) NOT NULL DEFAULT '50',
@@ -100,9 +100,9 @@ DROP TABLE IF EXISTS `s_leave`;
 
 CREATE TABLE `s_leave` (
   `id` VARCHAR(32),
-  `student_id` int(5) NOT NULL,
+  `student_id` VARCHAR(32) NOT NULL,
   `info` varchar(512) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` VARCHAR(32) NOT NULL DEFAULT '0',
   `remark` varchar(512) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -118,8 +118,8 @@ DROP TABLE IF EXISTS `s_score`;
 
 CREATE TABLE `s_score` (
   `id` VARCHAR(32) PRIMARY KEY ,
-  `student_id` int(5) NOT NULL,
-  `course_id` int(5) NOT NULL,
+  `student_id` VARCHAR(32) NOT NULL,
+  `course_id` VARCHAR(32) NOT NULL,
   `score` double(5,2) NOT NULL,
   `remark` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
@@ -161,7 +161,7 @@ CREATE TABLE `s_student` (
   `sn` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `clazz_id` int(5) NOT NULL,
+  `clazz_id` VARCHAR(32) NOT NULL,
   `sex` varchar(5) NOT NULL DEFAULT '男',
   `mobile` varchar(12) DEFAULT NULL,
   `qq` varchar(18) DEFAULT NULL,
@@ -185,7 +185,7 @@ CREATE TABLE `s_teacher` (
   `sn` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `clazz_id` int(5) NOT NULL,
+  `clazz_id` VARCHAR(32) NOT NULL,
   `sex` varchar(5) NOT NULL DEFAULT '男',
   `mobile` varchar(12) DEFAULT NULL,
   `qq` varchar(18) DEFAULT NULL,

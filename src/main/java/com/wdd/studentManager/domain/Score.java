@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 public class Score {
     private String id;
-    private Integer studentId;
-    private Integer courseId;
+    private String studentId;
+    private String courseId;
     private double score;
     private String remark;
 

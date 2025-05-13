@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 public class SelectedCourse {
     private String id;
-    private Integer studentId;
-    private Integer courseId;
+    private String studentId;
+    private String courseId;
 
 
 }

@@ -12,7 +12,7 @@ import lombok.Data;
 public class Course {
     private String id;
     private String name;
-    private int teacherId;
+    private String teacherId;
     private String courseDate;
     private int selectedNum = 0;//已选人数
     private int maxNum = 50;//课程最大选课人数
