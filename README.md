@@ -14,7 +14,7 @@
 
 ## 框架 ：
 
->springboot2.0 
+>springboot3.4.5 
 >
 >mybatis
 
@@ -50,27 +50,5 @@
 >
 > 系统管理
 
-## 项目截图：
 
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/1.png)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/2.png)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/3.png)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/4.png)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/5.png)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/6.jpg)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/7.jpg)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/8.jpg)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/9.jpg)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/项目截图/10.jpg)
-
-![](https://gitee.com/ZeroWdd/studentmanager/raw/master/%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE/11.jpg)
 
