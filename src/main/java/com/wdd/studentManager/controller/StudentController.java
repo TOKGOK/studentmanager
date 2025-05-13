@@ -92,8 +92,8 @@ public class StudentController {
     public AjaxResult deleteStudent(Data data){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            List<Integer> ids = data.getIds();
-            Iterator<Integer> iterator = ids.iterator();
+            List<String> ids = data.getIds();
+            Iterator<String> iterator = ids.iterator();
             while (iterator.hasNext()){  //判断是否存在课程关联学生
                 if(!selectedCourseService.isStudentId(iterator.next())){
                     ajaxResult.setSuccess(false);
@@ -102,7 +102,7 @@ public class StudentController {
                 }
             }
             File fileDir = UploadUtil.getImgDirFile();
-            for(Integer id : ids){
+            for(String id : ids){
                 Student byId = studentService.findById(id);
                 if(!byId.getPhoto().isEmpty()){
                     File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());

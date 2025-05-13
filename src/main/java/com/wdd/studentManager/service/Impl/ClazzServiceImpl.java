@@ -44,7 +44,7 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Override
     @Transactional
-    public int deleteClazz(List<Integer> ids) {
+    public int deleteClazz(List<String> ids) {
         return clazzMapper.deleteClazz(ids);
     }
 

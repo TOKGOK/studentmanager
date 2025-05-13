@@ -47,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public int deleteCourse(List<Integer> ids) {
+    public int deleteCourse(List<String> ids) {
         return courseMapper.deleteCourse(ids);
     }
 

@@ -7,12 +7,12 @@ package com.wdd.studentManager.util;
  * @Created by WDD
  */
 public class SnGenerateUtil {
-    public static String generateSn(int clazzId){
+    public static String generateSn(String clazzId){
         String sn = "";
         sn = "S" + clazzId + System.currentTimeMillis();
         return sn;
     }
-    public static String generateTeacherSn(int clazzId){
+    public static String generateTeacherSn(String clazzId){
         String sn = "";
         sn = "T" + clazzId + System.currentTimeMillis();
         return sn;

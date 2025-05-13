@@ -89,7 +89,7 @@ public class TeacherController {
         AjaxResult ajaxResult = new AjaxResult();
         try {
             File fileDir = UploadUtil.getImgDirFile();
-            for(Integer id : data.getIds()){
+            for(String id : data.getIds()){
                 Teacher byId = teacherService.findById(id);
                 if(!byId.getPhoto().isEmpty()){
                     File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());

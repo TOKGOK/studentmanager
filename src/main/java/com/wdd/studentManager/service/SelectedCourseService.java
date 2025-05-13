@@ -19,7 +19,7 @@ public interface SelectedCourseService {
 
     int deleteSelectedCourse(Integer id);
 
-    boolean isStudentId(int id);
+    boolean isStudentId(String id);
 
-    List<SelectedCourse> getAllBySid(int studentid);
+    List<SelectedCourse> getAllBySid(int studentId);
 }

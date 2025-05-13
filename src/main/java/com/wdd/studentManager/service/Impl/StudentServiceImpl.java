@@ -37,7 +37,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int deleteStudent(List<Integer> ids) {
+    public int deleteStudent(List<String> ids) {
         return studenetMapper.deleteStudent(ids);
     }
 
@@ -47,7 +47,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findById(Integer sid) {
+    public Student findById(String sid) {
         return studenetMapper.findById(sid);
     }
 

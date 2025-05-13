@@ -16,11 +16,11 @@ public interface StudenetMapper {
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int deleteStudent(List<Integer> ids);
+    int deleteStudent(List<String> ids);
 
     int addStudent(Student student);
 
-    Student findById(Integer sid);
+    Student findById(String sid);
 
     int editStudent(Student student);
 

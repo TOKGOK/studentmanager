@@ -69,7 +69,7 @@ public class SelectedCourseServiceImpl implements SelectedCourseService {
     }
 
     @Override
-    public boolean isStudentId(int id) {
+    public boolean isStudentId(String id) {
         List<SelectedCourse> selectedCourseList = selectedCourseMapper.isStudentId(id);
         if (selectedCourseList.isEmpty()){
             return true;
@@ -79,7 +79,7 @@ public class SelectedCourseServiceImpl implements SelectedCourseService {
     }
 
     @Override
-    public List<SelectedCourse> getAllBySid(int studentid) {
-        return selectedCourseMapper.getAllBySid(studentid);
+    public List<SelectedCourse> getAllBySid(int studentId) {
+        return selectedCourseMapper.getAllBySid(studentId);
     }
 }

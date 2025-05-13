@@ -15,11 +15,11 @@ import java.util.Map;
 public interface TeacherService {
     PageBean<Teacher> queryPage(Map<String, Object> paramMap);
 
-    int deleteTeacher(List<Integer> ids);
+    int deleteTeacher(List<String> ids);
 
     int addTeacher(Teacher teacher);
 
-    Teacher findById(Integer tid);
+    Teacher findById(String tid);
 
     int editTeacher(Teacher teacher);
 

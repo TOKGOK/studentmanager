@@ -15,17 +15,17 @@ import java.util.Map;
 public interface StudentService {
     PageBean<Student> queryPage(Map<String, Object> paramMap);
 
-    int deleteStudent(List<Integer> ids);
+    int deleteStudent(List<String> ids);
 
     int addStudent(Student student);
 
-    Student findById(Integer sid);
+    Student findById(String sid);
 
     int editStudent(Student student);
 
     Student findByStudent(Student student);
 
-    boolean isStudentByClazzId(Integer next);
+    boolean isStudentByClazzId(String next);
 
     int editPswdByStudent(Student student);
 

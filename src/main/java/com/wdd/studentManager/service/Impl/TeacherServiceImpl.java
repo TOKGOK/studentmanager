@@ -37,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int deleteTeacher(List<Integer> ids) {
+    public int deleteTeacher(List<String> ids) {
         return teacherMapper.deleteTeacher(ids);
     }
 
@@ -47,7 +47,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher findById(Integer tid) {
+    public Teacher findById(String tid) {
         return teacherMapper.findById(tid);
     }
 

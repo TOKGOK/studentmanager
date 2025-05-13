@@ -19,7 +19,7 @@ public interface CourseService {
 
     int editCourse(Course course);
 
-    int deleteCourse(List<Integer> ids);
+    int deleteCourse(List<String> ids);
 
     List<Course> getCourseById(List<Integer> ids);
 

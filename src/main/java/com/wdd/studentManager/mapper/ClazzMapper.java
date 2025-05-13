@@ -18,7 +18,7 @@ public interface ClazzMapper {
 
     int addClazz(Clazz clazz);
 
-    int deleteClazz(List<Integer> ids);
+    int deleteClazz(List<String> ids);
 
     int editClazz(Clazz clazz);
 

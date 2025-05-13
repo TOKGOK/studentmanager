@@ -102,8 +102,8 @@ public class ClazzController {
     public AjaxResult deleteClazz(Data data){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            List<Integer> ids = data.getIds();
-            Iterator<Integer> iterator = ids.iterator();
+            List<String> ids = data.getIds();
+            Iterator<String> iterator = ids.iterator();
             while (iterator.hasNext()){  //判断是否存在课程关联学生
                 if(!studentService.isStudentByClazzId(iterator.next())){
                     ajaxResult.setSuccess(false);
