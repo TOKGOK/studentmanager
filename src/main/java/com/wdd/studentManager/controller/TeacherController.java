@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Teacher;
+import com.wdd.studentManager.dto.TeacherDto;
 import com.wdd.studentManager.service.TeacherService;
 import com.wdd.studentManager.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +61,13 @@ public class TeacherController {
         if(!clazzid.equals("0"))  paramMap.put("clazzid",clazzid);
 
         //判断是老师还是学生权限
-        Teacher teacher = (Teacher) session.getAttribute(Const.TEACHER);
-        if(!StringUtils.isEmpty(teacher)){
+        TeacherDto teacherDto = (TeacherDto) session.getAttribute(Const.TEACHER);
+        if(!StringUtils.isEmpty(teacherDto)){
             //是老师权限，只能查询自己的信息
-            paramMap.put("teacherid",teacher.getId());
+            paramMap.put("teacherid", teacherDto.getId());
         }
 
-        PageBean<Teacher> pageBean = teacherService.queryPage(paramMap);
+        PageBean<TeacherDto> pageBean = teacherService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -90,7 +90,7 @@ public class TeacherController {
         try {
             File fileDir = UploadUtil.getImgDirFile();
             for(String id : data.getIds()){
-                Teacher byId = teacherService.findById(id);
+                TeacherDto byId = teacherService.findById(id);
                 if(!byId.getPhoto().isEmpty()){
                     File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());
                     if(file != null){
@@ -117,16 +117,16 @@ public class TeacherController {
     /**
      * 添加教师
      * @param files
-     * @param teacher
+     * @param teacherDto
      * @return
      * @throws IOException
      */
     @RequestMapping("/addTeacher")
     @ResponseBody
-    public AjaxResult addTeacher(@RequestParam("file") MultipartFile[] files, Teacher teacher) throws IOException {
+    public AjaxResult addTeacher(@RequestParam("file") MultipartFile[] files, TeacherDto teacherDto) throws IOException {
 
         AjaxResult ajaxResult = new AjaxResult();
-        teacher.setSn(SnGenerateUtil.generateTeacherSn(teacher.getClazzId()));
+        teacherDto.setSn(SnGenerateUtil.generateTeacherSn(teacherDto.getClazzId()));
 
         // 存放上传图片的文件夹
         File fileDir = UploadUtil.getImgDirFile();
@@ -146,11 +146,11 @@ public class TeacherController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            teacher.setPhoto(uuidName+extName);
+            teacherDto.setPhoto(uuidName+extName);
         }
         //保存学生信息到数据库
         try{
-            int count = teacherService.addTeacher(teacher);
+            int count = teacherService.addTeacher(teacherDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("保存成功");
@@ -170,7 +170,7 @@ public class TeacherController {
 
     @PostMapping("/editTeacher")
     @ResponseBody
-    public AjaxResult editTeacher(@RequestParam("file") MultipartFile[] files,Teacher teacher){
+    public AjaxResult editTeacher(@RequestParam("file") MultipartFile[] files, TeacherDto teacherDto){
         AjaxResult ajaxResult = new AjaxResult();
 
         // 存放上传图片的文件夹
@@ -192,7 +192,7 @@ public class TeacherController {
                 // 上传图片到 -》 “绝对路径”
                 fileImg.transferTo(newFile);
 
-                Teacher byId = teacherService.findById(teacher.getId());
+                TeacherDto byId = teacherService.findById(teacherDto.getId());
                 File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());
                 if(file != null){
                     file.delete();
@@ -201,11 +201,11 @@ public class TeacherController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            teacher.setPhoto(uuidName+extName);
+            teacherDto.setPhoto(uuidName+extName);
         }
 
         try{
-            int count = teacherService.editTeacher(teacher);
+            int count = teacherService.editTeacher(teacherDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("修改成功");

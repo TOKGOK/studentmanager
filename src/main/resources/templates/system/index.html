@@ -26,7 +26,7 @@
                      },
                      {"menuid":"3","icon":"","menuname":"教师信息管理",
                          "menus":[
-                             {"menuid":"31","menuname":"教师列表","icon":"icon-user-teacher","url":/*[[@{/teacher/teacher_list}]]*/},
+                             {"menuid":"31","menuname":"教师列表","icon":"icon-user-teacherDto","url":/*[[@{/teacherDto/teacher_list}]]*/},
                          ]
                      },
                      {"menuid":"6","icon":"","menuname":"课程信息管理",
@@ -128,7 +128,7 @@
         <span style="float:right; padding-right:20px;" class="head">
             <span style="color:red; font-weight:bold;" th:if="${session.usertype == '1'}" th:text="${session.admin.username}">&nbsp</span>
             <span style="color:red; font-weight:bold;" th:if="${session.usertype == '2'}" th:text="${session.studentDto.username}">&nbsp</span>
-            <span style="color:red; font-weight:bold;" th:if="${session.usertype == '3'}" th:text="${session.teacher.username}">&nbsp</span>
+            <span style="color:red; font-weight:bold;" th:if="${session.usertype == '3'}" th:text="${session.teacherDto.username}">&nbsp</span>
             您好&nbsp;&nbsp;&nbsp;
             <a th:href="@{/system/logout}" id="loginOut">安全退出</a>
         </span>

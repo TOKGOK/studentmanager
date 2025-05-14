@@ -70,7 +70,7 @@
                     multiple: false, //可多选
                     editable: false, //不可编辑
                     method: "post",
-                    url: [[@{/teacher/getTeacherList(from=combox)}]],
+                    url: [[@{/teacherDto/getTeacherList(from=combox)}]],
                     onChange: function(newValue, oldValue){
                         //加载班级下的学生
                         //$('#dataList').datagrid("options").queryParams = {clazzid: newValue};
@@ -299,7 +299,7 @@
             });
             //添加信息教师选择框
             $("#add_teacherList").combobox({
-                url: [[@{/teacher/getTeacherList(from=combox)}]],
+                url: [[@{/teacherDto/getTeacherList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");
@@ -308,7 +308,7 @@
             });
             //编辑信息教师选择框
             $("#edit_teacherList").combobox({
-                url: [[@{/teacher/getTeacherList(from=combox)}]],
+                url: [[@{/teacherDto/getTeacherList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");

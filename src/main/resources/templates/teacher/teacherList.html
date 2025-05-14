@@ -22,7 +22,7 @@
 				collapsible:false,//是否可折叠的
 				fit: true,//自动大小
 				method: "post",
-				url:[[@{/teacher/getTeacherList}]],
+				url:[[@{/teacherDto/getTeacherList}]],
 				idField:'id',
 				singleSelect:false,//是否单选
 				pagination:true,//分页控件
@@ -103,7 +103,7 @@
 						if(r){
 							$.ajax({
 								type: "post",
-								url: [[@{/teacher/deleteTeacher}]],
+								url: [[@{/teacherDto/deleteTeacher}]],
 								data: jsonObj,
 								success: function(data){
 									if(data.success){
@@ -168,7 +168,7 @@
 
 								$.ajax({
 									type: "post",
-									url: [[@{/teacher/addTeacher}]],
+									url: [[@{/teacherDto/addTeacher}]],
 									data: formData,
 									async: false,
 									cache: false,
@@ -294,7 +294,7 @@
 								formData.append("id",id);
 								$.ajax({
 									type: "post",
-									url: [[@{/teacher/editTeacher}]],
+									url: [[@{/teacherDto/editTeacher}]],
 									data: formData,
 									async: false,
 									cache: false,

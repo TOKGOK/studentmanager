@@ -1,11 +1,12 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Teacher;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.TeacherDto;
+import com.wdd.studentManager.entity.TeacherPo;
 import com.wdd.studentManager.mapper.TeacherMapper;
 import com.wdd.studentManager.service.TeacherService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +19,18 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class TeacherServiceImpl implements TeacherService {
+public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, TeacherPo> implements TeacherService {
 
     @Resource
     private TeacherMapper teacherMapper;
 
     @Override
-    public PageBean<Teacher> queryPage(Map<String, Object> paramMap) {
-        PageBean<Teacher> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<TeacherDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<TeacherDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Teacher> datas = teacherMapper.queryList(paramMap);
+        List<TeacherDto> datas = teacherMapper.queryList(paramMap);
         pageBean.setDatas(datas);
 
         Integer totalsize = teacherMapper.queryCount(paramMap);
@@ -43,27 +44,27 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public int addTeacher(Teacher teacher) {
-        return teacherMapper.addTeacher(teacher);
+    public int addTeacher(TeacherDto teacherDto) {
+        return teacherMapper.addTeacher(teacherDto);
     }
 
     @Override
-    public Teacher findById(String tid) {
+    public TeacherDto findById(String tid) {
         return teacherMapper.findById(tid);
     }
 
     @Override
-    public int editTeacher(Teacher teacher) {
-        return teacherMapper.editTeacher(teacher);
+    public int editTeacher(TeacherDto teacherDto) {
+        return teacherMapper.editTeacher(teacherDto);
     }
 
     @Override
-    public Teacher findByTeacher(Teacher teacher) {
-        return teacherMapper.findByTeacher(teacher);
+    public TeacherDto findByTeacher(TeacherDto teacherDto) {
+        return teacherMapper.findByTeacher(teacherDto);
     }
 
     @Override
-    public int editPswdByTeacher(Teacher teacher) {
-        return teacherMapper.editPswdByTeacher(teacher);
+    public int editPswdByTeacher(TeacherDto teacherDto) {
+        return teacherMapper.editPswdByTeacher(teacherDto);
     }
 }
