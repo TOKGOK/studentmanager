@@ -1,8 +1,9 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Admin;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.domain.Teacher;
+import com.wdd.studentManager.dto.AdminDto;
+import com.wdd.studentManager.entity.AdminPo;
 import com.wdd.studentManager.service.AdminService;
 import com.wdd.studentManager.service.StudentService;
 import com.wdd.studentManager.service.TeacherService;
@@ -85,10 +86,10 @@ public class SystemController {
         //数据库校验
         switch (type){
             case "1":{ //管理员
-                Admin admin = new Admin();
+                AdminDto admin = new AdminDto();
                 admin.setPassword(password);
                 admin.setUsername(username);
-                Admin ad = adminService.findByAdmin(admin);
+                AdminDto ad = adminService.findByAdmin(admin);
                 if(StringUtils.isEmpty(ad)){
                     ajaxResult.setSuccess(false);
                     ajaxResult.setMessage("用户名或密码错误");
@@ -187,15 +188,15 @@ public class SystemController {
      */
     @RequestMapping("/getPhoto")
     @ResponseBody
-    public AjaxResult getPhoto(@RequestParam(value = "sid",defaultValue = "0") Integer sid,
-                               @RequestParam(value = "tid",defaultValue = "0")Integer tid){
+    public AjaxResult getPhoto(@RequestParam(value = "sid",defaultValue = "0") String sid,
+                               @RequestParam(value = "tid",defaultValue = "0")String tid){
         AjaxResult ajaxResult = new AjaxResult();
-        if(sid != 0){
+        if(sid != null){
             Student student = studentService.findById(sid);
             ajaxResult.setImgurl(student.getPhoto());
             return ajaxResult;
         }
-        if(tid!=0){
+        if(tid != null){
             Teacher teacher = teacherService.findById(tid);
             ajaxResult.setImgurl(teacher.getPhoto());
             return ajaxResult;
@@ -225,7 +226,7 @@ public class SystemController {
         String usertype = (String) session.getAttribute(Const.USERTYPE);
         if (usertype.equals("1")){
             //管理员
-            Admin admin = (Admin)session.getAttribute(Const.ADMIN);
+            AdminPo admin = (AdminPo) session.getAttribute(Const.ADMIN);
             if(!password.equals(admin.getPassword())){
                 ajaxResult.setSuccess(false);
                 ajaxResult.setMessage("原密码错误");
@@ -233,7 +234,7 @@ public class SystemController {
             }
             admin.setPassword(newpassword);
             try{
-                int count = adminService.editPswdByAdmin(admin);
+                int count = adminService.editPasswordByAdmin(admin);
                 if(count > 0){
                     ajaxResult.setSuccess(true);
                     ajaxResult.setMessage("修改成功,请重新登录");

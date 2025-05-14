@@ -1,6 +1,8 @@
 package com.wdd.studentManager.service;
 
-import com.wdd.studentManager.domain.Admin;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.AdminDto;
+import com.wdd.studentManager.entity.AdminPo;
 
 /**
  * @Classname AdminService
@@ -8,10 +10,9 @@ import com.wdd.studentManager.domain.Admin;
  * @Date 2019/6/25 11:07
  * @Created by WDD
  */
-public interface AdminService {
+public interface AdminService extends IService<AdminPo> {
 
-    Admin findByAdmin(Admin admin);
+    AdminDto findByAdmin(AdminDto admin);
 
-
-    int editPswdByAdmin(Admin admin);
+    int editPasswordByAdmin(AdminPo admin);
 }
