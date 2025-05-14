@@ -1,7 +1,7 @@
 package com.wdd.studentManager.controller;
 
+import com.wdd.studentManager.dto.SelectedCourseDto;
 import com.wdd.studentManager.entity.CoursePo;
-import com.wdd.studentManager.domain.SelectedCourse;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.dto.AttendanceDto;
 import com.wdd.studentManager.service.AttendanceService;
@@ -95,11 +95,11 @@ public class AttendanceController {
     @ResponseBody
     public Object getStudentSelectedCourseList(@RequestParam(value = "studentid", defaultValue = "0")String studentid){
         //通过学生id 查询 选课信息
-        List<SelectedCourse> selectedCourseList = selectedCourseService.getAllBySid(Integer.parseInt(studentid));
+        List<SelectedCourseDto> selectedCourseDtoList = selectedCourseService.getAllBySid(Integer.parseInt(studentid));
         //通过 选课信息中的课程id 查询 学生所选择的课程
         List<String> ids = new ArrayList<>();
-        for(SelectedCourse selectedCourse : selectedCourseList){
-            ids.add(selectedCourse.getCourseId());
+        for(SelectedCourseDto selectedCourseDto : selectedCourseDtoList){
+            ids.add(selectedCourseDto.getCourseId());
         }
         List<CoursePo> coursePoList = courseService.getCourseById(ids);
         return coursePoList;

@@ -1,5 +1,6 @@
-package com.wdd.studentManager.domain;
+package com.wdd.studentManager.dto;
 
+import com.wdd.studentManager.common.dto.BaseDto;
 import lombok.Data;
 
 /**
@@ -9,10 +10,8 @@ import lombok.Data;
  * @Created by WDD
  */
 @Data
-public class SelectedCourse {
-    private String id;
+public class SelectedCourseDto extends BaseDto {
     private String studentId;
     private String courseId;
-
 
 }

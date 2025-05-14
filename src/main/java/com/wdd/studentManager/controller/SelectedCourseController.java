@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.SelectedCourse;
+import com.wdd.studentManager.dto.SelectedCourseDto;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.service.SelectedCourseService;
 import com.wdd.studentManager.util.AjaxResult;
@@ -61,7 +61,7 @@ public class SelectedCourseController {
             //是学生权限，只能查询自己的信息
             paramMap.put("studentid",student.getId());
         }
-        PageBean<SelectedCourse> pageBean = selectedCourseService.queryPage(paramMap);
+        PageBean<SelectedCourseDto> pageBean = selectedCourseService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -74,15 +74,15 @@ public class SelectedCourseController {
 
     /**
      * 学生进行选课
-     * @param selectedCourse
+     * @param selectedCourseDto
      * @return
      */
     @PostMapping("/addSelectedCourse")
     @ResponseBody
-    public AjaxResult addSelectedCourse(SelectedCourse selectedCourse){
+    public AjaxResult addSelectedCourse(SelectedCourseDto selectedCourseDto){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = selectedCourseService.addSelectedCourse(selectedCourse);
+            int count = selectedCourseService.addSelectedCourse(selectedCourseDto);
             if(count == 1){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("选课成功");

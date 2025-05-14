@@ -1,6 +1,8 @@
 package com.wdd.studentManager.service;
 
-import com.wdd.studentManager.domain.SelectedCourse;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.SelectedCourseDto;
+import com.wdd.studentManager.entity.SelectedCoursePo;
 import com.wdd.studentManager.util.PageBean;
 
 import java.util.List;
@@ -12,14 +14,14 @@ import java.util.Map;
  * @Date 2019/6/30 10:48
  * @Created by WDD
  */
-public interface SelectedCourseService {
-    PageBean<SelectedCourse> queryPage(Map<String, Object> paramMap);
+public interface SelectedCourseService extends IService<SelectedCoursePo> {
+    PageBean<SelectedCourseDto> queryPage(Map<String, Object> paramMap);
 
-    int addSelectedCourse(SelectedCourse selectedCourse);
+    int addSelectedCourse(SelectedCourseDto selectedCourseDto);
 
     int deleteSelectedCourse(Integer id);
 
     boolean isStudentId(String id);
 
-    List<SelectedCourse> getAllBySid(int studentId);
+    List<SelectedCourseDto> getAllBySid(int studentId);
 }
