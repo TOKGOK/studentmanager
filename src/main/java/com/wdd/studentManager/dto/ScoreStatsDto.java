@@ -1,4 +1,4 @@
-package com.wdd.studentManager.domain;
+package com.wdd.studentManager.dto;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  * @Created by WDD
  */
 @Data
-public class ScoreStats {
+public class ScoreStatsDto {
     private Double max_score;
     private Double avg_score;
     private Double min_score;

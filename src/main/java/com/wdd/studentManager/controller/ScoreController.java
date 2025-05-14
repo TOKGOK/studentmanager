@@ -1,7 +1,7 @@
 package com.wdd.studentManager.controller;
 
 import com.wdd.studentManager.dto.ScoreDto;
-import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.dto.ScoreStatsDto;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.service.ScoreService;
@@ -326,12 +326,12 @@ public class ScoreController {
                                         String searchType){
         AjaxResult ajaxResult = new AjaxResult();
         if(searchType.equals("avg")){
-            ScoreStats scoreStats = scoreService.getAvgStats(courseid);
+            ScoreStatsDto scoreStatsDto = scoreService.getAvgStats(courseid);
 
             List<Double> scoreList = new ArrayList<Double>();
-            scoreList.add(scoreStats.getMax_score());
-            scoreList.add(scoreStats.getMin_score());
-            scoreList.add(scoreStats.getAvg_score());
+            scoreList.add(scoreStatsDto.getMax_score());
+            scoreList.add(scoreStatsDto.getMin_score());
+            scoreList.add(scoreStatsDto.getAvg_score());
 
             List<String> avgStringList = new ArrayList<String>();
             avgStringList.add("最高分");
@@ -339,7 +339,7 @@ public class ScoreController {
             avgStringList.add("平均分");
 
             Map<String, Object> retMap = new HashMap<String, Object>();
-            retMap.put("courseName", scoreStats.getCourseName());
+            retMap.put("courseName", scoreStatsDto.getCourseName());
             retMap.put("scoreList", scoreList);
             retMap.put("avgList", avgStringList);
             retMap.put("type", "success");

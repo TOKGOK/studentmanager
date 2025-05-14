@@ -2,7 +2,7 @@ package com.wdd.studentManager.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wdd.studentManager.dto.ScoreDto;
-import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.dto.ScoreStatsDto;
 import com.wdd.studentManager.entity.ScorePo;
 import com.wdd.studentManager.mapper.ScoreMapper;
 import com.wdd.studentManager.service.ScoreService;
@@ -70,7 +70,7 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, ScorePo> implemen
     }
 
     @Override
-    public ScoreStats getAvgStats(Integer courseid) {
+    public ScoreStatsDto getAvgStats(Integer courseid) {
         return scoreMapper.getAvgStats(courseid);
     }
 }

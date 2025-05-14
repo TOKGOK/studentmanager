@@ -2,7 +2,7 @@ package com.wdd.studentManager.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wdd.studentManager.dto.ScoreDto;
-import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.dto.ScoreStatsDto;
 import com.wdd.studentManager.entity.ScorePo;
 import com.wdd.studentManager.util.PageBean;
 
@@ -28,5 +28,5 @@ public interface ScoreService extends IService<ScorePo> {
 
     List<ScoreDto> getAll(ScoreDto scoreDto);
 
-    ScoreStats getAvgStats(Integer courseid);
+    ScoreStatsDto getAvgStats(Integer courseid);
 }

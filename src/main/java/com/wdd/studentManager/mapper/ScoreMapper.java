@@ -2,7 +2,7 @@ package com.wdd.studentManager.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wdd.studentManager.dto.ScoreDto;
-import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.dto.ScoreStatsDto;
 import com.wdd.studentManager.entity.ScorePo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -31,5 +31,5 @@ public interface ScoreMapper extends BaseMapper<ScorePo> {
 
     List<ScoreDto> getAll(ScoreDto scoreDto);
 
-    ScoreStats getAvgStats(Integer courseid);
+    ScoreStatsDto getAvgStats(Integer courseid);
 }
