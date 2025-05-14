@@ -1,5 +1,7 @@
 package com.wdd.studentManager.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wdd.studentManager.entity.GradePo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,6 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @Created by WDD
  */
 @Mapper
-
-public interface GradeMapper {
+public interface GradeMapper extends BaseMapper<GradePo> {
 }
