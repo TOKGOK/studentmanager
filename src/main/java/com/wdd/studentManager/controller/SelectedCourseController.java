@@ -1,7 +1,7 @@
 package com.wdd.studentManager.controller;
 
 import com.wdd.studentManager.dto.SelectedCourseDto;
-import com.wdd.studentManager.domain.Student;
+import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.service.SelectedCourseService;
 import com.wdd.studentManager.util.AjaxResult;
 import com.wdd.studentManager.util.Const;
@@ -56,10 +56,10 @@ public class SelectedCourseController {
         if(!studentid.equals("0"))  paramMap.put("studentId",studentid);
         if(!courseid.equals("0"))  paramMap.put("courseId",courseid);
         //判断是老师还是学生权限
-        Student student = (Student) session.getAttribute(Const.STUDENT);
-        if(!StringUtils.isEmpty(student)){
+        StudentDto studentDto = (StudentDto) session.getAttribute(Const.STUDENT);
+        if(!StringUtils.isEmpty(studentDto)){
             //是学生权限，只能查询自己的信息
-            paramMap.put("studentid",student.getId());
+            paramMap.put("studentid", studentDto.getId());
         }
         PageBean<SelectedCourseDto> pageBean = selectedCourseService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){

@@ -2,7 +2,7 @@ package com.wdd.studentManager.controller;
 
 import com.wdd.studentManager.dto.ScoreDto;
 import com.wdd.studentManager.dto.ScoreStatsDto;
-import com.wdd.studentManager.domain.Student;
+import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.service.ScoreService;
 import com.wdd.studentManager.service.SelectedCourseService;
@@ -81,10 +81,10 @@ public class ScoreController {
         if(!courseid.equals("0"))  paramMap.put("courseid",courseid);
 
         //判断是老师还是学生权限
-        Student student = (Student) session.getAttribute(Const.STUDENT);
-        if(!StringUtils.isEmpty(student)){
+        StudentDto studentDto = (StudentDto) session.getAttribute(Const.STUDENT);
+        if(!StringUtils.isEmpty(studentDto)){
             //是学生权限，只能查询自己的信息
-            paramMap.put("studentid",student.getId());
+            paramMap.put("studentid", studentDto.getId());
         }
         PageBean<ScoreDto> pageBean = scoreService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
@@ -268,10 +268,10 @@ public class ScoreController {
     @ResponseBody
     private void exportScore(HttpServletResponse response, ScoreDto scoreDto, HttpSession session) {
         //获取当前登录用户类型
-        Student student = (Student) session.getAttribute(Const.STUDENT);
-        if(!StringUtils.isEmpty(student)){
+        StudentDto studentDto = (StudentDto) session.getAttribute(Const.STUDENT);
+        if(!StringUtils.isEmpty(studentDto)){
             //如果是学生，只能查看自己的信息
-            scoreDto.setStudentId(student.getId());
+            scoreDto.setStudentId(studentDto.getId());
         }
         try {
             response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("score_list_sid_"+ scoreDto.getStudentId()+"_cid_"+ scoreDto.getStudentId()+".xls", "UTF-8"));

@@ -35,10 +35,10 @@
                     {field:'studentId',title:'学生',width:200,
                         formatter: function(value,row,index){
                             if (row.studentId){
-                                var studentList = $("#studentList").combobox("getData");
-                                for(var i=0;i<studentList.length;i++ ){
+                                var studentDtoList = $("#studentDtoList").combobox("getData");
+                                for(var i=0;i<studentDtoList.length;i++ ){
                                     //console.log(clazzList[i]);
-                                    if(row.studentId == studentList[i].id)return studentList[i].username;
+                                    if(row.studentId == studentDtoList[i].id)return studentDtoList[i].username;
                                 }
                                 return row.studentId;
                             } else {
@@ -65,7 +65,7 @@
                 toolbar: "#toolbar",
                 onBeforeLoad : function(){
                     // try{
-                    //     $("#studentList").combobox("getData")
+                    //     $("#studentDtoList").combobox("getData")
                     // }catch(err){
                     //     preLoadClazz();
                     // }
@@ -74,7 +74,7 @@
             });
             //提前加载学生和课程信息
             function preLoadClazz(){
-                $("#studentList").combobox({
+                $("#studentDtoList").combobox({
                     width: "150",
                     height: "25",
                     valueField: "id",
@@ -82,7 +82,7 @@
                     multiple: false, //可多选
                     editable: false, //不可编辑
                     method: "post",
-                    url: [[@{/student/getStudentList(from=combox)}]],
+                    url: [[@{/studentDto/getStudentList(from=combox)}]],
 
                 });
                 $("#coursePoList").combobox({
@@ -223,7 +223,7 @@
                 editable: false, //不可编辑
                 method: "post",
             });
-            $("#add_studentList,#studentList").combobox({
+            $("#add_studentList,#studentDtoList").combobox({
                 width: "200",
                 height: "30",
                 valueField: "id",
@@ -236,7 +236,7 @@
 
             //添加信息学生选择框
             $("#add_studentList").combobox({
-                url: [[@{/student/getStudentList(from=combox)}]],
+                url: [[@{/studentDto/getStudentList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");
@@ -257,7 +257,7 @@
             //搜索按钮监听事件
             $("#search-btn").click(function(){
                 $('#dataList').datagrid('load',{
-                    studentid: $("#studentList").combobox('getValue') == '' ? 0 : $("#studentList").combobox('getValue'),
+                    studentid: $("#studentDtoList").combobox('getValue') == '' ? 0 : $("#studentDtoList").combobox('getValue'),
                     courseid: $("#coursePoList").combobox('getValue') == '' ? 0 : $("#coursePoList").combobox('getValue')
                 });
             });
@@ -277,7 +277,7 @@
     <div style="float: left; margin-right: 10px;"><a id="delete" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-some-delete',plain:true">退选</a></div>
     <div style="float: left;" class="datagrid-btn-separator"></div>
     <div style="margin-top: 3px;">
-        学生：<input id="studentList" class="easyui-textbox" name="studentList" />
+        学生：<input id="studentDtoList" class="easyui-textbox" name="studentDtoList" />
         课程：<input id="coursePoList" class="easyui-textbox" name="coursePoList" />
         <a id="search-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
     </div>

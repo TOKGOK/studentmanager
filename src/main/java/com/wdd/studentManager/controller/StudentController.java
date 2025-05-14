@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Student;
+import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.service.ClazzService;
 import com.wdd.studentManager.service.SelectedCourseService;
 import com.wdd.studentManager.service.StudentService;
@@ -65,13 +65,13 @@ public class StudentController {
         if(!clazzid.equals("0"))  paramMap.put("clazzid",clazzid);
 
         //判断是老师还是学生权限
-        Student student = (Student) session.getAttribute(Const.STUDENT);
-        if(!StringUtils.isEmpty(student)){
+        StudentDto studentDto = (StudentDto) session.getAttribute(Const.STUDENT);
+        if(!StringUtils.isEmpty(studentDto)){
             //是学生权限，只能查询自己的信息
-            paramMap.put("studentid",student.getId());
+            paramMap.put("studentid", studentDto.getId());
         }
 
-        PageBean<Student> pageBean = studentService.queryPage(paramMap);
+        PageBean<StudentDto> pageBean = studentService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -103,7 +103,7 @@ public class StudentController {
             }
             File fileDir = UploadUtil.getImgDirFile();
             for(String id : ids){
-                Student byId = studentService.findById(id);
+                StudentDto byId = studentService.findById(id);
                 if(!byId.getPhoto().isEmpty()){
                     File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());
                     if(file != null){
@@ -133,16 +133,16 @@ public class StudentController {
     /**
      * 添加学生
      * @param files
-     * @param student
+     * @param studentDto
      * @return
      * @throws IOException
      */
     @RequestMapping("/addStudent")
     @ResponseBody
-    public AjaxResult addStudent(@RequestParam("file") MultipartFile[] files,Student student) throws IOException {
+    public AjaxResult addStudent(@RequestParam("file") MultipartFile[] files, StudentDto studentDto) throws IOException {
 
         AjaxResult ajaxResult = new AjaxResult();
-        student.setSn(SnGenerateUtil.generateSn(student.getClazzId()));
+        studentDto.setSn(SnGenerateUtil.generateSn(studentDto.getClazzId()));
 
         // 存放上传图片的文件夹
         File fileDir = UploadUtil.getImgDirFile();
@@ -162,11 +162,11 @@ public class StudentController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            student.setPhoto(uuidName+extName);
+            studentDto.setPhoto(uuidName+extName);
         }
         //保存学生信息到数据库
         try{
-            int count = studentService.addStudent(student);
+            int count = studentService.addStudent(studentDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("保存成功");
@@ -187,12 +187,12 @@ public class StudentController {
     /**
      * 修改学生信息
      * @param files
-     * @param student
+     * @param studentDto
      * @return
      */
     @PostMapping("/editStudent")
     @ResponseBody
-    public AjaxResult editStudent(@RequestParam("file") MultipartFile[] files,Student student){
+    public AjaxResult editStudent(@RequestParam("file") MultipartFile[] files, StudentDto studentDto){
         AjaxResult ajaxResult = new AjaxResult();
 
         // 存放上传图片的文件夹
@@ -214,7 +214,7 @@ public class StudentController {
                 // 上传图片到 -》 “绝对路径”
                 fileImg.transferTo(newFile);
 
-                Student byId = studentService.findById(student.getId());
+                StudentDto byId = studentService.findById(studentDto.getId());
                 File file = new File(fileDir.getAbsolutePath() + File.separator + byId.getPhoto());
                 if(file != null){
                     file.delete();
@@ -223,11 +223,11 @@ public class StudentController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            student.setPhoto(uuidName+extName);
+            studentDto.setPhoto(uuidName+extName);
         }
 
         try{
-            int count = studentService.editStudent(student);
+            int count = studentService.editStudent(studentDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("修改成功");

@@ -1,8 +1,8 @@
 package com.wdd.studentManager.controller;
 
 import com.wdd.studentManager.dto.SelectedCourseDto;
+import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.entity.CoursePo;
-import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.dto.AttendanceDto;
 import com.wdd.studentManager.service.AttendanceService;
 import com.wdd.studentManager.service.CourseService;
@@ -70,10 +70,10 @@ public class AttendanceController {
         if(!StringUtils.isEmpty(date))  paramMap.put("date",date);
 
         //判断是老师还是学生权限
-        Student student = (Student) session.getAttribute(Const.STUDENT);
-        if(!StringUtils.isEmpty(student)){
+        StudentDto studentDto = (StudentDto) session.getAttribute(Const.STUDENT);
+        if(!StringUtils.isEmpty(studentDto)){
             //是学生权限，只能查询自己的信息
-            paramMap.put("studentid",student.getId());
+            paramMap.put("studentid", studentDto.getId());
         }
         PageBean<AttendanceDto> pageBean = attendanceService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){

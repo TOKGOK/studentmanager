@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Student;
+import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.domain.Teacher;
 import com.wdd.studentManager.dto.AdminDto;
 import com.wdd.studentManager.entity.AdminPo;
@@ -101,10 +101,10 @@ public class SystemController {
                 break;
             }
             case "2":{
-                Student student = new Student();
-                student.setPassword(password);
-                student.setUsername(username);
-                Student st = studentService.findByStudent(student);
+                StudentDto studentDto = new StudentDto();
+                studentDto.setPassword(password);
+                studentDto.setUsername(username);
+                StudentDto st = studentService.findByStudent(studentDto);
                 if(StringUtils.isEmpty(st)){
                     ajaxResult.setSuccess(false);
                     ajaxResult.setMessage("用户名或密码错误");
@@ -192,8 +192,8 @@ public class SystemController {
                                @RequestParam(value = "tid",defaultValue = "0")String tid){
         AjaxResult ajaxResult = new AjaxResult();
         if(sid != null){
-            Student student = studentService.findById(sid);
-            ajaxResult.setImgurl(student.getPhoto());
+            StudentDto studentDto = studentService.findById(sid);
+            ajaxResult.setImgurl(studentDto.getPhoto());
             return ajaxResult;
         }
         if(tid != null){
@@ -250,15 +250,15 @@ public class SystemController {
         }
         if(usertype.equals("2")){
             //学生
-            Student student = (Student)session.getAttribute(Const.STUDENT);
-            if(!password.equals(student.getPassword())){
+            StudentDto studentDto = (StudentDto)session.getAttribute(Const.STUDENT);
+            if(!password.equals(studentDto.getPassword())){
                 ajaxResult.setSuccess(false);
                 ajaxResult.setMessage("原密码错误");
                 return ajaxResult;
             }
-            student.setPassword(newpassword);
+            studentDto.setPassword(newpassword);
             try{
-                int count = studentService.editPswdByStudent(student);
+                int count = studentService.editPswdByStudent(studentDto);
                 if(count > 0){
                     ajaxResult.setSuccess(true);
                     ajaxResult.setMessage("修改成功,请重新登录");

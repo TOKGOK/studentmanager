@@ -1,6 +1,8 @@
 package com.wdd.studentManager.service;
 
-import com.wdd.studentManager.domain.Student;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.StudentDto;
+import com.wdd.studentManager.entity.StudentPo;
 import com.wdd.studentManager.util.PageBean;
 
 import java.util.List;
@@ -12,22 +14,22 @@ import java.util.Map;
  * @Date 2019/6/27 14:11
  * @Created by WDD
  */
-public interface StudentService {
-    PageBean<Student> queryPage(Map<String, Object> paramMap);
+public interface StudentService extends IService<StudentPo> {
+    PageBean<StudentDto> queryPage(Map<String, Object> paramMap);
 
     int deleteStudent(List<String> ids);
 
-    int addStudent(Student student);
+    int addStudent(StudentDto studentDto);
 
-    Student findById(String sid);
+    StudentDto findById(String sid);
 
-    int editStudent(Student student);
+    int editStudent(StudentDto studentDto);
 
-    Student findByStudent(Student student);
+    StudentDto findByStudent(StudentDto studentDto);
 
     boolean isStudentByClazzId(String next);
 
-    int editPswdByStudent(Student student);
+    int editPswdByStudent(StudentDto studentDto);
 
     int findByName(String username);
 }

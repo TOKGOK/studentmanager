@@ -20,7 +20,7 @@
 				collapsible:false,//是否可折叠的
 				fit: true,//自动大小
 				method: "post",
-				url:[[@{/student/getStudentList}]],
+				url:[[@{/studentDto/getStudentList}]],
 				idField:'id',
 				singleSelect:false,//是否单选
 				pagination:true,//分页控件
@@ -100,7 +100,7 @@
 						if(r){
 							$.ajax({
 								type: "post",
-								url: [[@{/student/deleteStudent}]],
+								url: [[@{/studentDto/deleteStudent}]],
 								data:jsonObj,
 								success: function(data){
 									if(data.success){
@@ -214,7 +214,7 @@
 								var formData = new FormData($( "#addForm" )[0]);
 								$.ajax({
 									type: "post",
-									url: [[@{/student/addStudent}]],
+									url: [[@{/studentDto/addStudent}]],
 									data: formData,
 									async: false,
 									cache: false,
@@ -292,7 +292,7 @@
 								var formData = new FormData($( "#editForm" )[0]);
 								$.ajax({
 									type: "post",
-									url: [[@{/student/editStudent}]],
+									url: [[@{/studentDto/editStudent}]],
 									data: formData,
 									async: false,
 									cache: false,

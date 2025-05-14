@@ -1,11 +1,12 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Student;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.StudentDto;
+import com.wdd.studentManager.entity.StudentPo;
 import com.wdd.studentManager.mapper.StudenetMapper;
 import com.wdd.studentManager.service.StudentService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +19,18 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl extends ServiceImpl<StudenetMapper, StudentPo> implements StudentService {
 
     @Resource
     private StudenetMapper studenetMapper;
 
     @Override
-    public PageBean<Student> queryPage(Map<String, Object> paramMap) {
-        PageBean<Student> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<StudentDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<StudentDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Student> datas = studenetMapper.queryList(paramMap);
+        List<StudentDto> datas = studenetMapper.queryList(paramMap);
         pageBean.setDatas(datas);
 
         Integer totalsize = studenetMapper.queryCount(paramMap);
@@ -43,29 +44,29 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int addStudent(Student student) {
-        return studenetMapper.addStudent(student);
+    public int addStudent(StudentDto studentDto) {
+        return studenetMapper.addStudent(studentDto);
     }
 
     @Override
-    public Student findById(String sid) {
+    public StudentDto findById(String sid) {
         return studenetMapper.findById(sid);
     }
 
     @Override
-    public int editStudent(Student student) {
-        return studenetMapper.editStudent(student);
+    public int editStudent(StudentDto studentDto) {
+        return studenetMapper.editStudent(studentDto);
     }
 
     @Override
-    public Student findByStudent(Student student) {
-        return studenetMapper.findByStudent(student);
+    public StudentDto findByStudent(StudentDto studentDto) {
+        return studenetMapper.findByStudent(studentDto);
     }
 
     @Override
-    public boolean isStudentByClazzId(Integer id) {
-        List<Student> studentList = studenetMapper.isStudentByClazzId(id);
-        if (studentList.isEmpty()){
+    public boolean isStudentByClazzId(String id) {
+        List<StudentDto> studentDtoList = studenetMapper.isStudentByClazzId(id);
+        if (studentDtoList.isEmpty()){
             return true;
         }else{
             return false;
@@ -73,8 +74,8 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int editPswdByStudent(Student student) {
-        return studenetMapper.editPswdByStudent(student);
+    public int editPswdByStudent(StudentDto studentDto) {
+        return studenetMapper.editPswdByStudent(studentDto);
     }
 
     @Override

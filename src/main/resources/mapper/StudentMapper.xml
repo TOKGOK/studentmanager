@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdd.studentManager.mapper.StudenetMapper">
 
-    <resultMap type="com.wdd.studentManager.domain.Student" id="StudentInfo">
+    <resultMap type="com.wdd.studentManager.dto.StudentDto" id="StudentInfo">
         <result column="id" property="id"/>
         <result column="sn" property="sn"/>
         <result column="username" property="username"/>
@@ -84,7 +84,7 @@
         select * from s_student where username = #{username} and password = #{password}
     </select>
 
-    <select id="isStudentByClazzId" parameterType="int" resultMap="StudentInfo">
+    <select id="isStudentByClazzId" parameterType="String" resultMap="StudentInfo">
         select * from s_student where clazz_id = #{id}
     </select>
 

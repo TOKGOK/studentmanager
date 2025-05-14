@@ -34,10 +34,10 @@
                     {field:'studentId',title:'学生',width:200,
                         formatter: function(value,row,index){
                             if (row.studentId){
-                                var studentList = $("#studentList").combobox("getData");
-                                for(var i=0;i<studentList.length;i++ ){
+                                var studentDtoList = $("#studentDtoList").combobox("getData");
+                                for(var i=0;i<studentDtoList.length;i++ ){
                                     //console.log(clazzList[i]);
-                                    if(row.studentId == studentList[i].id)return studentList[i].username;
+                                    if(row.studentId == studentDtoList[i].id)return studentDtoList[i].username;
                                 }
                                 return row.studentId;
                             } else {
@@ -66,7 +66,7 @@
                 toolbar: "#toolbar",
                 onBeforeLoad : function(){
                     try{
-                        $("#studentList").combobox("getData")
+                        $("#studentDtoList").combobox("getData")
                     }catch(err){
                         preLoadClazz();
                     }
@@ -74,7 +74,7 @@
             });
             //提前加载学生信息
             function preLoadClazz(){
-                $("#studentList").combobox({
+                $("#studentDtoList").combobox({
                     width: "150",
                     height: "25",
                     valueField: "id",
@@ -82,7 +82,7 @@
                     multiple: false, //可多选
                     editable: false, //不可编辑
                     method: "post",
-                    url: [[@{/student/getStudentList(from=combox)}]],
+                    url: [[@{/studentDto/getStudentList(from=combox)}]],
                     onChange: function(newValue, oldValue){
                         //加载班级下的学生
                         //$('#dataList').datagrid("options").queryParams = {clazzid: newValue};
@@ -381,7 +381,7 @@
             });
 
             //下拉框通用属性
-            $("#add_studentList, #edit_studentList,#studentList").combobox({
+            $("#add_studentList, #edit_studentList,#studentDtoList").combobox({
                 width: "200",
                 height: "30",
                 valueField: "id",
@@ -392,7 +392,7 @@
             });
             //添加信息学生选择框
             $("#add_studentList").combobox({
-                url: [[@{/student/getStudentList(from=combox)}]],
+                url: [[@{/studentDto/getStudentList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");
@@ -401,7 +401,7 @@
             });
             //编辑信息学生选择框
             $("#edit_studentList").combobox({
-                url: [[@{/student/getStudentList(from=combox)}]],
+                url: [[@{/studentDto/getStudentList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");
@@ -412,14 +412,14 @@
             //搜索按钮监听事件
             $("#search-btn").click(function(){
                 $('#dataList').datagrid('load',{
-                    studentid: $("#studentList").combobox('getValue') == '' ? 0 : $("#studentList").combobox('getValue')
+                    studentid: $("#studentDtoList").combobox('getValue') == '' ? 0 : $("#studentDtoList").combobox('getValue')
                 });
             });
 
             //清空搜索条件
             $("#clear-btn").click(function(){
                 $('#dataList').datagrid("reload",{});
-                $("#studentList").combobox('clear');
+                $("#studentDtoList").combobox('clear');
             });
         });
         /*]]>*/
@@ -439,7 +439,7 @@
     <div style="float: left; margin-right: 10px;"><a id="delete" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-some-delete',plain:true">删除</a></div>
     <div style="float: left;" class="datagrid-btn-separator"></div>
     <div style="margin-top: 3px;">
-        学生：<input id="studentList" class="easyui-textbox" name="studentid" />
+        学生：<input id="studentDtoList" class="easyui-textbox" name="studentid" />
         <a id="search-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         <a id="clear-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">清空搜索</a>
     </div>

@@ -1,10 +1,10 @@
-package com.wdd.studentManager.domain;
+package com.wdd.studentManager.dto;
 
+import com.wdd.studentManager.common.dto.BaseDto;
 import lombok.Data;
 
 @Data
-public class Student {
-	private String id;
+public class StudentDto extends BaseDto {
 	private String sn;//学号
 	private String username;
 	private String password;
@@ -13,6 +13,5 @@ public class Student {
 	private String mobile;
 	private String qq;
 	private String photo;//头像
-
 
 }
