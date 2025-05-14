@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdd.studentManager.mapper.LeaveMapper">
 
-    <resultMap type="com.wdd.studentManager.domain.Leave" id="LeaveInfo">
+    <resultMap type="com.wdd.studentManager.dto.LeaveDto" id="LeaveInfo">
         <result column="id" property="id"/>
         <result column="student_id" property="studentId"/>
         <result column="info" property="info"/>

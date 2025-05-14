@@ -20,7 +20,7 @@
                 collapsible: false,//是否可折叠的
                 fit: true,//自动大小
                 method: "post",
-                url:[[@{/leave/getLeaveList}]],
+                url:[[@{/leaveDto/getLeaveList}]],
                 idField:'id',
                 singleSelect: true,//是否单选
                 pagination: true,//分页控件
@@ -164,7 +164,7 @@
 
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/leave/editLeave}]],
+                                    url: [[@{/leaveDto/editLeave}]],
                                     data: data,
                                     success: function(data){
                                         if(data.success){
@@ -246,7 +246,7 @@
 
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/leave/checkLeave}]],
+                                    url: [[@{/leaveDto/checkLeave}]],
                                     data: data,
                                     success: function(data){
                                         if(data.success){
@@ -306,7 +306,7 @@
                         if(r){
                             $.ajax({
                                 type: "post",
-                                url: [[@{/leave/deleteLeave}]],
+                                url: [[@{/leaveDto/deleteLeave}]],
                                 data: {id: selectRow.id},
                                 success: function(data){
                                     if(data.success){
@@ -349,7 +349,7 @@
                             } else{
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/leave/addLeave}]],
+                                    url: [[@{/leaveDto/addLeave}]],
                                     data: $("#addForm").serialize(),
                                     success: function(data){
                                         if(data.success){

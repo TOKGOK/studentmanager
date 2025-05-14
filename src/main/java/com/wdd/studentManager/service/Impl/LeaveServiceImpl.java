@@ -1,11 +1,12 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Leave;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.LeaveDto;
+import com.wdd.studentManager.entity.LeavePo;
 import com.wdd.studentManager.mapper.LeaveMapper;
 import com.wdd.studentManager.service.LeaveService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +19,18 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class LeaveServiceImpl implements LeaveService {
+public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, LeavePo> implements LeaveService {
 
     @Resource
     private LeaveMapper leaveMapper;
 
     @Override
-    public PageBean<Leave> queryPage(Map<String, Object> paramMap) {
-        PageBean<Leave> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<LeaveDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<LeaveDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Leave> datas = leaveMapper.queryList(paramMap);
+        List<LeaveDto> datas = leaveMapper.queryList(paramMap);
         pageBean.setDatas(datas);
 
         Integer totalsize = leaveMapper.queryCount(paramMap);
@@ -38,18 +39,18 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
     @Override
-    public int addLeave(Leave leave) {
-        return leaveMapper.addLeave(leave);
+    public int addLeave(LeaveDto leaveDto) {
+        return leaveMapper.addLeave(leaveDto);
     }
 
     @Override
-    public int editLeave(Leave leave) {
-        return leaveMapper.editLeave(leave);
+    public int editLeave(LeaveDto leaveDto) {
+        return leaveMapper.editLeave(leaveDto);
     }
 
     @Override
-    public int checkLeave(Leave leave) {
-        return leaveMapper.checkLeave(leave);
+    public int checkLeave(LeaveDto leaveDto) {
+        return leaveMapper.checkLeave(leaveDto);
     }
 
     @Override

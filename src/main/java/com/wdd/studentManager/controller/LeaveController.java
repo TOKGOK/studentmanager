@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Leave;
+import com.wdd.studentManager.dto.LeaveDto;
 import com.wdd.studentManager.service.LeaveService;
 import com.wdd.studentManager.util.AjaxResult;
 import com.wdd.studentManager.util.PageBean;
@@ -51,7 +51,7 @@ public class LeaveController {
         paramMap.put("pageno",page);
         paramMap.put("pagesize",rows);
         if(!studentid.equals("0"))  paramMap.put("studentId",studentid);
-        PageBean<Leave> pageBean = leaveService.queryPage(paramMap);
+        PageBean<LeaveDto> pageBean = leaveService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -64,15 +64,15 @@ public class LeaveController {
 
     /**
      * 添加学生请假条
-     * @param leave
+     * @param leaveDto
      * @return
      */
     @PostMapping("/addLeave")
     @ResponseBody
-    public AjaxResult addLeave(Leave leave){
+    public AjaxResult addLeave(LeaveDto leaveDto){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = leaveService.addLeave(leave);
+            int count = leaveService.addLeave(leaveDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("添加成功");
@@ -90,15 +90,15 @@ public class LeaveController {
 
     /**
      * 修改请假条
-     * @param leave
+     * @param leaveDto
      * @return
      */
     @PostMapping("/editLeave")
     @ResponseBody
-    public AjaxResult editLeave(Leave leave){
+    public AjaxResult editLeave(LeaveDto leaveDto){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = leaveService.editLeave(leave);
+            int count = leaveService.editLeave(leaveDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("修改成功");
@@ -116,15 +116,15 @@ public class LeaveController {
 
     /**
      * 对假条进行审核
-     * @param leave
+     * @param leaveDto
      * @return
      */
     @PostMapping("/checkLeave")
     @ResponseBody
-    public AjaxResult checkLeave(Leave leave){
+    public AjaxResult checkLeave(LeaveDto leaveDto){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = leaveService.checkLeave(leave);
+            int count = leaveService.checkLeave(leaveDto);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("审批成功");

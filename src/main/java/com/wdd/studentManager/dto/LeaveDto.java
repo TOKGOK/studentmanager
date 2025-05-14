@@ -1,5 +1,6 @@
-package com.wdd.studentManager.domain;
+package com.wdd.studentManager.dto;
 
+import com.wdd.studentManager.common.dto.BaseDto;
 import lombok.Data;
 
 /**
@@ -9,10 +10,9 @@ import lombok.Data;
  * @Created by WDD
  */
 @Data
-public class Leave {
+public class LeaveDto extends BaseDto {
 
-    private String id;
-    private int studentId;
+    private String studentId;
     private String info;//请假理由
     private int status;//请假条状态
     private String remark;//批复内容

@@ -1,6 +1,8 @@
 package com.wdd.studentManager.mapper;
 
-import com.wdd.studentManager.domain.Leave;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wdd.studentManager.dto.LeaveDto;
+import com.wdd.studentManager.entity.LeavePo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,16 +15,16 @@ import java.util.Map;
  * @Created by WDD
  */
 @Mapper
-public interface LeaveMapper {
-    List<Leave> queryList(Map<String, Object> paramMap);
+public interface LeaveMapper extends BaseMapper<LeavePo> {
+    List<LeaveDto> queryList(Map<String, Object> paramMap);
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int addLeave(Leave leave);
+    int addLeave(LeaveDto leaveDto);
 
-    int editLeave(Leave leave);
+    int editLeave(LeaveDto leaveDto);
 
-    int checkLeave(Leave leave);
+    int checkLeave(LeaveDto leaveDto);
 
     int deleteLeave(Integer id);
 }
