@@ -5,6 +5,7 @@ import com.wdd.studentManager.domain.ScoreStats;
 import com.wdd.studentManager.mapper.ScoreMapper;
 import com.wdd.studentManager.service.ScoreService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import java.util.Map;
 @Service
 public class ScoreServiceImpl implements ScoreService {
 
-    @Autowired
+    @Resource
     private ScoreMapper scoreMapper;
 
     @Override

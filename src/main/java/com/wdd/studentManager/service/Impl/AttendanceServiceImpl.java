@@ -8,6 +8,7 @@ import com.wdd.studentManager.entity.AttendancePo;
 import com.wdd.studentManager.mapper.AttendanceMapper;
 import com.wdd.studentManager.service.AttendanceService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ import java.util.Map;
 @Service
 public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, AttendancePo> implements AttendanceService {
 
-    @Autowired
+    @Resource
     private AttendanceMapper attendanceMapper;
 
     @Override

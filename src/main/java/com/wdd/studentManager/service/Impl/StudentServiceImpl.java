@@ -4,6 +4,7 @@ import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.mapper.StudenetMapper;
 import com.wdd.studentManager.service.StudentService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
+    @Resource
     private StudenetMapper studenetMapper;
 
     @Override

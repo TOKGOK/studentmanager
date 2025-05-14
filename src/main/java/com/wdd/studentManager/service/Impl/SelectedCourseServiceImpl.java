@@ -5,6 +5,7 @@ import com.wdd.studentManager.mapper.CourseMapper;
 import com.wdd.studentManager.mapper.SelectedCourseMapper;
 import com.wdd.studentManager.service.SelectedCourseService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +23,9 @@ import java.util.Map;
 @Service
 public class SelectedCourseServiceImpl implements SelectedCourseService {
 
-    @Autowired
+    @Resource
     private SelectedCourseMapper selectedCourseMapper;
-    @Autowired
+    @Resource
     private CourseMapper courseMapper;
 
     @Override

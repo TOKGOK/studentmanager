@@ -6,6 +6,7 @@ import com.wdd.studentManager.entity.ClazzPo;
 import com.wdd.studentManager.mapper.ClazzMapper;
 import com.wdd.studentManager.service.ClazzService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ import java.util.Map;
 @Service
 public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, ClazzPo> implements ClazzService {
 
-    @Autowired
+    @Resource
     private ClazzMapper clazzMapper;
 
     @Override

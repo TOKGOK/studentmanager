@@ -1,5 +1,6 @@
 package com.wdd.studentManager.controller;
 
+import com.wdd.studentManager.dto.CourseDto;
 import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.util.AjaxResult;
@@ -51,7 +52,7 @@ public class CourseController {
         paramMap.put("pagesize",rows);
         if(!StringUtils.isEmpty(name))  paramMap.put("name",name);
         if(!teacherid.equals("0"))  paramMap.put("teacherId",teacherid);
-        PageBean<CoursePo> pageBean = courseService.queryPage(paramMap);
+        PageBean<CourseDto> pageBean = courseService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -69,7 +70,7 @@ public class CourseController {
      */
     @PostMapping("/addCourse")
     @ResponseBody
-    public AjaxResult addCourse(CoursePo coursePo){
+    public AjaxResult addCourse(CourseDto coursePo){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = courseService.addCourse(coursePo);
@@ -96,7 +97,7 @@ public class CourseController {
      */
     @PostMapping("/editCourse")
     @ResponseBody
-    public AjaxResult editCourse(CoursePo coursePo){
+    public AjaxResult editCourse(CourseDto coursePo){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = courseService.editCourse(coursePo);

@@ -1,6 +1,7 @@
 package com.wdd.studentManager.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.CourseDto;
 import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.util.PageBean;
 
@@ -14,15 +15,15 @@ import java.util.Map;
  * @Created by WDD
  */
 public interface CourseService extends IService<CoursePo> {
-    PageBean<CoursePo> queryPage(Map<String, Object> paramMap);
+    PageBean<CourseDto> queryPage(Map<String, Object> paramMap);
 
-    int addCourse(CoursePo coursePo);
+    int addCourse(CourseDto coursePo);
 
-    int editCourse(CoursePo coursePo);
+    int editCourse(CourseDto coursePo);
 
     int deleteCourse(List<String> ids);
 
-    List<CoursePo> getCourseById(List<String> ids);
+    List<CourseDto> getCourseById(List<String> ids);
 
     int findByName(String name);
 }

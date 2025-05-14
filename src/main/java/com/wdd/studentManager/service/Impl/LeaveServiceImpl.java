@@ -4,6 +4,7 @@ import com.wdd.studentManager.domain.Leave;
 import com.wdd.studentManager.mapper.LeaveMapper;
 import com.wdd.studentManager.service.LeaveService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 @Service
 public class LeaveServiceImpl implements LeaveService {
 
-    @Autowired
+    @Resource
     private LeaveMapper leaveMapper;
 
     @Override

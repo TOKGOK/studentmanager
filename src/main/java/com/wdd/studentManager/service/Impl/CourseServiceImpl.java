@@ -1,10 +1,13 @@
 package com.wdd.studentManager.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.CourseDto;
 import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.mapper.CourseMapper;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.util.PageBean;
+import jakarta.annotation.Resource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +23,35 @@ import java.util.Map;
 @Service
 public class CourseServiceImpl extends ServiceImpl<CourseMapper,CoursePo> implements CourseService {
 
-    @Autowired
+    @Resource
     private CourseMapper courseMapper;
 
     @Override
-    public PageBean<CoursePo> queryPage(Map<String, Object> paramMap) {
-        PageBean<CoursePo> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<CourseDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<CourseDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<CoursePo> datas = courseMapper.queryList(paramMap);
-        pageBean.setDatas(datas);
+        List<CourseDto> data = courseMapper.queryList(paramMap);
+        pageBean.setDatas(data);
 
-        Integer totalsize = courseMapper.queryCount(paramMap);
-        pageBean.setTotalsize(totalsize);
+        Integer totalSize = courseMapper.queryCount(paramMap);
+        pageBean.setTotalsize(totalSize);
         return pageBean;
     }
 
     @Override
-    public int addCourse(CoursePo coursePo) {
-        return courseMapper.addCourse(coursePo);
+    public int addCourse(CourseDto course) {
+        CoursePo coursePo = new CoursePo();
+        BeanUtils.copyProperties(course,coursePo);
+        return save(coursePo) ? 1 : 0;
     }
 
     @Override
-    public int editCourse(CoursePo coursePo) {
-        return courseMapper.editCourse(coursePo);
+    public int editCourse(CourseDto course) {
+        CoursePo coursePo = new CoursePo();
+        BeanUtils.copyProperties(course,coursePo);
+        return saveOrUpdate(coursePo) ? 1 : 0;
     }
 
     @Override
@@ -53,7 +60,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,CoursePo> implem
     }
 
     @Override
-    public List<CoursePo> getCourseById(List<String> ids) {
+    public List<CourseDto> getCourseById(List<String> ids) {
         return courseMapper.getCourseById(ids);
     }
 
