@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdd.studentManager.mapper.ScoreMapper">
 
-    <resultMap type="com.wdd.studentManager.domain.Score" id="ScoreInfo">
+    <resultMap type="com.wdd.studentManager.dto.ScoreDto" id="ScoreInfo">
         <result column="id" property="id"/>
         <result column="course_id" property="courseId"/>
         <result column="student_id" property="studentId"/>
-        <result column="score" property="score"/>
+        <result column="scoreDto" property="scoreDto"/>
         <result column="remark" property="remark"/>
         <result column="courseName" property="courseName"/>
         <result column="studentName" property="studentName"/>
@@ -32,8 +32,8 @@
     </select>
 
     <insert id="addScore" parameterType="Score">
-        insert into s_score(course_id,student_id,score,remark)
-        values(#{courseId},#{studentId},#{score},#{remark})
+        insert into s_score(course_id,student_id,scoreDto,remark)
+        values(#{courseId},#{studentId},#{scoreDto},#{remark})
     </insert>
 
     <delete id="deleteScore" parameterType="int">
@@ -79,7 +79,7 @@
     </select>
 
     <update id="editScore" parameterType="Score">
-        update  s_score set course_id = #{courseId},student_id = #{studentId},score = #{score}, remark = #{remark} where id = #{id}
+        update  s_score set course_id = #{courseId},student_id = #{studentId},scoreDto = #{scoreDto}, remark = #{remark} where id = #{id}
     </update>
 
     <select id="getAll" parameterType="Score" resultMap="ScoreInfo">
@@ -93,7 +93,7 @@
     </select>
 
     <select id="getAvgStats" parameterType="int" resultType="ScoreStats">
-        select max(s_score.score) as max_score,avg(s_score.score) as avg_score,min(s_score.score) as min_score,s_course.name as courseName
+        select max(s_score.scoreDto) as max_score,avg(s_score.scoreDto) as avg_score,min(s_score.scoreDto) as min_score,s_course.name as courseName
         from s_score,s_course
         where s_score.course_id=s_course.id and s_score.course_id = #{courseid}
     </select>

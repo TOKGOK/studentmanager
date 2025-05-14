@@ -20,7 +20,7 @@
                 collapsible: false,//是否可折叠的
                 fit: true,//自动大小
                 method: "post",
-                url:[[@{/score/getScoreList}]],
+                url:[[@{/scoreDto/getScoreList}]],
                 idField:'id',
                 singleSelect: true,//是否单选
                 pagination: true,//分页控件
@@ -60,7 +60,7 @@
                             }
                         }
                     },
-                    {field:'score',title:'成绩',width:200},
+                    {field:'scoreDto',title:'成绩',width:200},
                     {field:'remark',title:'备注',width:200}
                     ]
                 ],
@@ -143,7 +143,7 @@
                         if(r){
                             $.ajax({
                                 type: "post",
-                                url: [[@{/score/deleteScore}]],
+                                url: [[@{/scoreDto/deleteScore}]],
                                 data: {id: id},
                                 success: function(data){
                                     if(data.success){
@@ -186,7 +186,7 @@
                             } else{
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/score/addScore}]],
+                                    url: [[@{/scoreDto/addScore}]],
                                     data: $("#addForm").serialize(),
                                     success: function(data){
                                         if(data.success){
@@ -242,7 +242,7 @@
                             } else{
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/score/editScore}]],
+                                    url: [[@{/scoreDto/editScore}]],
                                     data: $("#editForm").serialize(),
                                     success: function(data){
                                         if(data.success){
@@ -275,7 +275,7 @@
                     var selectRow = $("#dataList").datagrid("getSelected");
                     //设置值
                     $("#edit_studentList").combobox('setValue', selectRow.studentId);
-                    $("#edit_score").numberbox('setValue', selectRow.score);
+                    $("#edit_score").numberbox('setValue', selectRow.scoreDto);
                     $("#edit_remark").textbox('setValue', selectRow.remark);
                     setTimeout(function(){
                         $("#edit_courseList").combobox('setValue', selectRow.courseId);
@@ -399,7 +399,7 @@
             $("#export").click(function(){
                 studentid = $("#studentList").combobox('getValue') == '' ? 0 : $("#studentList").combobox('getValue');
                 courseid = $("#coursePoList").combobox('getValue') == '' ? 0 : $("#coursePoList").combobox('getValue');
-                url = [[@{/score/exportScore}]] + "?studentId=" + studentid + "&courseId="+courseid;
+                url = [[@{/scoreDto/exportScore}]] + "?studentId=" + studentid + "&courseId="+courseid;
                 window.location.href = url;
             });
 
@@ -474,7 +474,7 @@
             <tr>
                 <td style="width:40px">成绩:</td>
                 <td colspan="3">
-                    <input id="add_score" style="width: 200px; height: 30px;" class="easyui-numberbox" data-options="required:true,min:0,precision:2, missingMessage:'请填写正确的成绩'" name="score" />
+                    <input id="add_score" style="width: 200px; height: 30px;" class="easyui-numberbox" data-options="required:true,min:0,precision:2, missingMessage:'请填写正确的成绩'" name="scoreDto" />
                 </td>
                 <td style="width:80px"></td>
             </tr>
@@ -513,7 +513,7 @@
             <tr>
                 <td style="width:40px">成绩:</td>
                 <td colspan="3">
-                    <input id="edit_score" style="width: 200px; height: 30px;" class="easyui-numberbox" data-options="required:true,min:0,precision:2, missingMessage:'请填写正确的成绩'" name="score" />
+                    <input id="edit_score" style="width: 200px; height: 30px;" class="easyui-numberbox" data-options="required:true,min:0,precision:2, missingMessage:'请填写正确的成绩'" name="scoreDto" />
                 </td>
                 <td style="width:80px"></td>
             </tr>
@@ -530,7 +530,7 @@
 
 <!-- 导入数据窗口 -->
 <div id="importDialog" style="padding: 10px">
-    <form id="importForm" method="post" enctype="multipart/form-data" th:action="@{/score/importScore}" target="import_target">
+    <form id="importForm" method="post" enctype="multipart/form-data" th:action="@{/scoreDto/importScore}" target="import_target">
         <table cellpadding="8" >
             <tr>
                 <td>请选择文件:</td>

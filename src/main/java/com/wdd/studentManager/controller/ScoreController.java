@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Score;
+import com.wdd.studentManager.dto.ScoreDto;
 import com.wdd.studentManager.domain.ScoreStats;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.service.CourseService;
@@ -86,7 +86,7 @@ public class ScoreController {
             //是学生权限，只能查询自己的信息
             paramMap.put("studentid",student.getId());
         }
-        PageBean<Score> pageBean = scoreService.queryPage(paramMap);
+        PageBean<ScoreDto> pageBean = scoreService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -100,20 +100,20 @@ public class ScoreController {
 
     /**
      * 添加成绩
-     * @param score
+     * @param scoreDto
      * @return
      */
     @PostMapping("/addScore")
     @ResponseBody
-    public AjaxResult addScore(Score score){
+    public AjaxResult addScore(ScoreDto scoreDto){
         AjaxResult ajaxResult = new AjaxResult();
         //判断是否已录入成绩
-        if(scoreService.isScore(score)){
+        if(scoreService.isScore(scoreDto)){
             //true为已签到
             ajaxResult.setSuccess(false);
             ajaxResult.setMessage("已录入，请勿重复录入！");
         }else{
-            int count = scoreService.addScore(score);
+            int count = scoreService.addScore(scoreDto);
             if(count > 0){
                 //签到成功
                 ajaxResult.setSuccess(true);
@@ -129,15 +129,15 @@ public class ScoreController {
 
     /**
      * 修改学生成绩
-     * @param score
+     * @param scoreDto
      * @return
      */
     @PostMapping("/editScore")
     @ResponseBody
-    public AjaxResult editScore(Score score){
+    public AjaxResult editScore(ScoreDto scoreDto){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = scoreService.editScore(score);
+            int count = scoreService.editScore(scoreDto);
             if(count > 0){
                 //签到成功
                 ajaxResult.setSuccess(true);
@@ -228,14 +228,14 @@ public class ScoreController {
                 int studentId = studentService.findByName(row.getCell(0).getStringCellValue());
                 int courseId = courseService.findByName(row.getCell(1).getStringCellValue());
                 // 2)判断是否已存在数据库中
-                Score score = new Score();
-                score.setStudentId(studentId);
-                score.setCourseId(courseId);
-                score.setScore(scoreValue);
-                score.setRemark(remark);
-                if(!scoreService.isScore(score)){
+                ScoreDto scoreDto = new ScoreDto();
+                scoreDto.setStudentId(studentId);
+                scoreDto.setCourseId(courseId);
+                scoreDto.setScore(scoreValue);
+                scoreDto.setRemark(remark);
+                if(!scoreService.isScore(scoreDto)){
                     // 3)存入数据库
-                    int i = scoreService.addScore(score);
+                    int i = scoreService.addScore(scoreDto);
                     if(i > 0){
                         count ++ ;
                     }
@@ -261,24 +261,24 @@ public class ScoreController {
     /**
      * 导出xlsx表
      * @param response
-     * @param score
+     * @param scoreDto
      * @param session
      */
     @RequestMapping("/exportScore")
     @ResponseBody
-    private void exportScore(HttpServletResponse response,Score score,HttpSession session) {
+    private void exportScore(HttpServletResponse response, ScoreDto scoreDto, HttpSession session) {
         //获取当前登录用户类型
         Student student = (Student) session.getAttribute(Const.STUDENT);
         if(!StringUtils.isEmpty(student)){
             //如果是学生，只能查看自己的信息
-            score.setStudentId(student.getId());
+            scoreDto.setStudentId(student.getId());
         }
         try {
-            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("score_list_sid_"+score.getStudentId()+"_cid_"+score.getStudentId()+".xls", "UTF-8"));
+            response.setHeader("Content-Disposition", "attachment;filename="+ URLEncoder.encode("score_list_sid_"+ scoreDto.getStudentId()+"_cid_"+ scoreDto.getStudentId()+".xls", "UTF-8"));
             response.setHeader("Connection", "close");
             response.setHeader("Content-Type", "application/octet-stream");
             ServletOutputStream outputStream = response.getOutputStream();
-            List<Score> scoreList = scoreService.getAll(score);
+            List<ScoreDto> scoreDtoList = scoreService.getAll(scoreDto);
             XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
             XSSFSheet createSheet = xssfWorkbook.createSheet("成绩列表");
             XSSFRow createRow = createSheet.createRow(0);
@@ -288,7 +288,7 @@ public class ScoreController {
             createRow.createCell(3).setCellValue("备注");
             //实现将数据装入到excel文件中
             int row = 1;
-            for( Score s:scoreList){
+            for( ScoreDto s: scoreDtoList){
                 createRow = createSheet.createRow(row++);
                 createRow.createCell(0).setCellValue(s.getStudentName());
                 createRow.createCell(1).setCellValue(s.getCourseName());
@@ -347,9 +347,9 @@ public class ScoreController {
             return retMap;
         }
 
-        Score score = new Score();
-        score.setCourseId(courseid);
-        List<Score> scoreList = scoreService.getAll(score);
+        ScoreDto scoreDto = new ScoreDto();
+        scoreDto.setCourseId(courseid);
+        List<ScoreDto> scoreDtoList = scoreService.getAll(scoreDto);
 
 
         List<Integer> numberList = new ArrayList<Integer>();
@@ -368,7 +368,7 @@ public class ScoreController {
 
         String courseName = "";
 
-        for(Score sc : scoreList){
+        for(ScoreDto sc : scoreDtoList){
             courseName = sc.getCourseName();  //获取课程名
             double scoreValue = sc.getScore();//获取成绩
             if(scoreValue < 60){

@@ -1,12 +1,13 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Score;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.ScoreDto;
 import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.entity.ScorePo;
 import com.wdd.studentManager.mapper.ScoreMapper;
 import com.wdd.studentManager.service.ScoreService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,18 +20,18 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class ScoreServiceImpl implements ScoreService {
+public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, ScorePo> implements ScoreService {
 
     @Resource
     private ScoreMapper scoreMapper;
 
     @Override
-    public PageBean<Score> queryPage(Map<String, Object> paramMap) {
-        PageBean<Score> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<ScoreDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<ScoreDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Score> datas = scoreMapper.queryList(paramMap);
+        List<ScoreDto> datas = scoreMapper.queryList(paramMap);
         pageBean.setDatas(datas);
 
         Integer totalsize = scoreMapper.queryCount(paramMap);
@@ -39,8 +40,8 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public boolean isScore(Score score) {
-        Score sc = scoreMapper.isScore(score);
+    public boolean isScore(ScoreDto scoreDto) {
+        ScoreDto sc = scoreMapper.isScore(scoreDto);
         if(sc != null){
             return true;
         }else{
@@ -49,13 +50,13 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public int addScore(Score score) {
-        return scoreMapper.addScore(score);
+    public int addScore(ScoreDto scoreDto) {
+        return scoreMapper.addScore(scoreDto);
     }
 
     @Override
-    public int editScore(Score score) {
-        return scoreMapper.editScore(score);
+    public int editScore(ScoreDto scoreDto) {
+        return scoreMapper.editScore(scoreDto);
     }
 
     @Override
@@ -64,8 +65,8 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public List<Score> getAll(Score score) {
-        return scoreMapper.getAll(score);
+    public List<ScoreDto> getAll(ScoreDto scoreDto) {
+        return scoreMapper.getAll(scoreDto);
     }
 
     @Override

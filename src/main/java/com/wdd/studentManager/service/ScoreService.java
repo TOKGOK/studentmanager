@@ -1,7 +1,9 @@
 package com.wdd.studentManager.service;
 
-import com.wdd.studentManager.domain.Score;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.ScoreDto;
 import com.wdd.studentManager.domain.ScoreStats;
+import com.wdd.studentManager.entity.ScorePo;
 import com.wdd.studentManager.util.PageBean;
 
 import java.util.List;
@@ -13,18 +15,18 @@ import java.util.Map;
  * @Date 2019/7/3 11:45
  * @Created by WDD
  */
-public interface ScoreService {
-    PageBean<Score> queryPage(Map<String, Object> paramMap);
+public interface ScoreService extends IService<ScorePo> {
+    PageBean<ScoreDto> queryPage(Map<String, Object> paramMap);
 
-    boolean isScore(Score score);
+    boolean isScore(ScoreDto scoreDto);
 
-    int addScore(Score score);
+    int addScore(ScoreDto scoreDto);
 
-    int editScore(Score score);
+    int editScore(ScoreDto scoreDto);
 
     int deleteScore(Integer id);
 
-    List<Score> getAll(Score score);
+    List<ScoreDto> getAll(ScoreDto scoreDto);
 
     ScoreStats getAvgStats(Integer courseid);
 }

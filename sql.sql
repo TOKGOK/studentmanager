@@ -120,13 +120,13 @@ CREATE TABLE `s_score` (
   `id` VARCHAR(32) PRIMARY KEY ,
   `student_id` VARCHAR(32) NOT NULL,
   `course_id` VARCHAR(32) NOT NULL,
-  `score` double(5,2) NOT NULL,
+  `scoreDto` double(5,2) NOT NULL,
   `remark` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `s_score` */
 
-insert  into `s_score`(`id`,`student_id`,`course_id`,`score`,`remark`)
+insert  into `s_score`(`id`,`student_id`,`course_id`,`scoreDto`,`remark`)
 values
     (67,4,2,78.00,'中等'),
     (68,9,1,50.00,'不及格');

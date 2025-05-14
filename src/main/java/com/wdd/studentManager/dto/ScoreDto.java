@@ -1,5 +1,6 @@
-package com.wdd.studentManager.domain;
+package com.wdd.studentManager.dto;
 
+import com.wdd.studentManager.common.dto.BaseDto;
 import lombok.Data;
 
 /**
@@ -9,8 +10,7 @@ import lombok.Data;
  * @Created by WDD
  */
 @Data
-public class Score {
-    private String id;
+public class ScoreDto extends BaseDto {
     private String studentId;
     private String courseId;
     private double score;

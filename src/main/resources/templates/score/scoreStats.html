@@ -38,7 +38,7 @@
             });
 
             //搜索按钮监听事件
-            $(".search-score-btn").click(function(){
+            $(".search-scoreDto-btn").click(function(){
                 var searchKey = $(this).attr('key');
                 var courseId = $("#coursePoList").combobox('getValue');
                 if(courseId == null || courseId == ''){
@@ -46,7 +46,7 @@
                     return;
                 }
                 $.ajax({
-                    url:   [[@{/score/getScoreStatsList}]] + "?courseid="+courseId+"&searchType="+searchKey,
+                    url:   [[@{/scoreDto/getScoreStatsList}]] + "?courseid="+courseId+"&searchType="+searchKey,
                     dataType:'json',
                     success:function(rst){
                         if(rst.type == "success"){
@@ -102,7 +102,7 @@
                                     series: [{
                                         name: '成绩分布',
                                         type: 'bar',
-                                        data: rst.scoreList
+                                        data: rst.scoreDtoList
                                     }]
                                 };
                             }
@@ -125,8 +125,8 @@
 <div id="toolbar" class="datagrid-toolbar">
     <div style="margin-top: 3px;">
         课程：<input id="coursePoList" class="easyui-textbox" name="coursePoList" />
-        <a href="javascript:;" class="easyui-linkbutton search-score-btn" key="range" data-options="iconCls:'icon-sum',plain:true">区间统计图</a>
-        <a href="javascript:;" class="easyui-linkbutton search-score-btn" key="avg" data-options="iconCls:'icon-sum',plain:true">平均统计图</a>
+        <a href="javascript:;" class="easyui-linkbutton search-scoreDto-btn" key="range" data-options="iconCls:'icon-sum',plain:true">区间统计图</a>
+        <a href="javascript:;" class="easyui-linkbutton search-scoreDto-btn" key="avg" data-options="iconCls:'icon-sum',plain:true">平均统计图</a>
     </div>
 </div>
 <div id="charts-div" style="width:100%;height:500px;"></div>
