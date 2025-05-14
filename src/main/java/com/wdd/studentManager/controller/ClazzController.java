@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Clazz;
+import com.wdd.studentManager.dto.ClazzDto;
 import com.wdd.studentManager.service.ClazzService;
 import com.wdd.studentManager.service.StudentService;
 import com.wdd.studentManager.util.AjaxResult;
@@ -55,7 +55,7 @@ public class ClazzController {
         paramMap.put("pageno",page);
         paramMap.put("pagesize",rows);
         if(!StringUtils.isEmpty(clazzName))  paramMap.put("name",clazzName);
-        PageBean<Clazz> pageBean = clazzService.queryPage(paramMap);
+        PageBean<ClazzDto> pageBean = clazzService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -73,7 +73,7 @@ public class ClazzController {
      */
     @PostMapping("/addClazz")
     @ResponseBody
-    public AjaxResult addClazz(Clazz clazz){
+    public AjaxResult addClazz(ClazzDto clazz){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = clazzService.addClazz(clazz);
@@ -134,7 +134,7 @@ public class ClazzController {
      */
     @PostMapping("/editClazz")
     @ResponseBody
-    public AjaxResult editClazz(Clazz clazz){
+    public AjaxResult editClazz(ClazzDto clazz){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = clazzService.editClazz(clazz);

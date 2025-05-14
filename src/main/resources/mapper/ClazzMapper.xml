@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdd.studentManager.mapper.ClazzMapper">
 
-    <resultMap type="com.wdd.studentManager.domain.Clazz" id="ClazzInfo">
+    <resultMap type="com.wdd.studentManager.dto.ClazzDto" id="ClazzInfo">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="info" property="info"/>
@@ -25,9 +25,6 @@
         </where>
     </select>
 
-    <insert id="addClazz" parameterType="Clazz">
-        insert into s_clazz(name,info) values(#{name},#{info})
-    </insert>
 
     <delete id="deleteClazz" parameterType="java.util.ArrayList">
         delete from s_clazz
@@ -39,11 +36,8 @@
         </where>
     </delete>
 
-    <update id="editClazz" parameterType="Clazz">
-        update s_clazz set name = #{name},info = #{info} where id = #{id}
-    </update>
 
-    <select id="findByName" parameterType="String" resultType="Clazz">
+    <select id="findByName" parameterType="String" resultType="com.wdd.studentManager.dto.ClazzDto">
         select * from s_clazz where name = #{clazzName}
     </select>
 

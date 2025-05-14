@@ -1,9 +1,12 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Clazz;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.dto.ClazzDto;
+import com.wdd.studentManager.entity.ClazzPo;
 import com.wdd.studentManager.mapper.ClazzMapper;
 import com.wdd.studentManager.service.ClazzService;
 import com.wdd.studentManager.util.PageBean;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,28 +21,30 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class ClazzServiceImpl implements ClazzService {
+public class ClazzServiceImpl extends ServiceImpl<ClazzMapper, ClazzPo> implements ClazzService {
 
     @Autowired
     private ClazzMapper clazzMapper;
 
     @Override
-    public PageBean<Clazz> queryPage(Map<String, Object> paramMap) {
-        PageBean<Clazz> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<ClazzDto> queryPage(Map<String, Object> paramMap) {
+        PageBean<ClazzDto> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Clazz> datas = clazzMapper.queryList(paramMap);
-        pageBean.setDatas(datas);
+        List<ClazzDto> data = clazzMapper.queryList(paramMap);
+        pageBean.setDatas(data);
 
-        Integer totalsize = clazzMapper.queryCount(paramMap);
-        pageBean.setTotalsize(totalsize);
+        Integer totalSize = clazzMapper.queryCount(paramMap);
+        pageBean.setTotalsize(totalSize);
         return pageBean;
     }
 
     @Override
-    public int addClazz(Clazz clazz) {
-        return clazzMapper.addClazz(clazz);
+    public int addClazz(ClazzDto clazz) {
+        ClazzPo clazzPo = new ClazzPo();
+        BeanUtils.copyProperties(clazz,clazzPo);
+        return save(clazzPo) ? 1 : 0;
     }
 
     @Override
@@ -49,12 +54,14 @@ public class ClazzServiceImpl implements ClazzService {
     }
 
     @Override
-    public int editClazz(Clazz clazz) {
-        return clazzMapper.editClazz(clazz);
+    public int editClazz(ClazzDto clazz) {
+        ClazzPo clazzPo = new ClazzPo();
+        BeanUtils.copyProperties(clazz,clazzPo);
+        return saveOrUpdate(clazzPo) ? 1 : 0;
     }
 
     @Override
-    public Clazz findByName(String clazzName) {
+    public ClazzDto findByName(String clazzName) {
         return clazzMapper.findByName(clazzName);
     }
 
