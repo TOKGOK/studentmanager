@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Course;
+import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.util.AjaxResult;
 import com.wdd.studentManager.util.Data;
@@ -51,7 +51,7 @@ public class CourseController {
         paramMap.put("pagesize",rows);
         if(!StringUtils.isEmpty(name))  paramMap.put("name",name);
         if(!teacherid.equals("0"))  paramMap.put("teacherId",teacherid);
-        PageBean<Course> pageBean = courseService.queryPage(paramMap);
+        PageBean<CoursePo> pageBean = courseService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -64,15 +64,15 @@ public class CourseController {
 
     /**
      * 添加课程信息
-     * @param course
+     * @param coursePo
      * @return
      */
     @PostMapping("/addCourse")
     @ResponseBody
-    public AjaxResult addCourse(Course course){
+    public AjaxResult addCourse(CoursePo coursePo){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = courseService.addCourse(course);
+            int count = courseService.addCourse(coursePo);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("添加成功");
@@ -91,15 +91,15 @@ public class CourseController {
 
     /**
      * 修改课程信息
-     * @param course
+     * @param coursePo
      * @return
      */
     @PostMapping("/editCourse")
     @ResponseBody
-    public AjaxResult editCourse(Course course){
+    public AjaxResult editCourse(CoursePo coursePo){
         AjaxResult ajaxResult = new AjaxResult();
         try {
-            int count = courseService.editCourse(course);
+            int count = courseService.editCourse(coursePo);
             if(count > 0){
                 ajaxResult.setSuccess(true);
                 ajaxResult.setMessage("修改成功");

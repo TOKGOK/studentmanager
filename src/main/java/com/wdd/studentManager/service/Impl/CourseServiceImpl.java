@@ -1,6 +1,7 @@
 package com.wdd.studentManager.service.Impl;
 
-import com.wdd.studentManager.domain.Course;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.mapper.CourseMapper;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.util.PageBean;
@@ -17,18 +18,18 @@ import java.util.Map;
  * @Created by WDD
  */
 @Service
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl extends ServiceImpl<CourseMapper,CoursePo> implements CourseService {
 
     @Autowired
     private CourseMapper courseMapper;
 
     @Override
-    public PageBean<Course> queryPage(Map<String, Object> paramMap) {
-        PageBean<Course> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
+    public PageBean<CoursePo> queryPage(Map<String, Object> paramMap) {
+        PageBean<CoursePo> pageBean = new PageBean<>((Integer) paramMap.get("pageno"),(Integer) paramMap.get("pagesize"));
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<Course> datas = courseMapper.queryList(paramMap);
+        List<CoursePo> datas = courseMapper.queryList(paramMap);
         pageBean.setDatas(datas);
 
         Integer totalsize = courseMapper.queryCount(paramMap);
@@ -37,13 +38,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public int addCourse(Course course) {
-        return courseMapper.addCourse(course);
+    public int addCourse(CoursePo coursePo) {
+        return courseMapper.addCourse(coursePo);
     }
 
     @Override
-    public int editCourse(Course course) {
-        return courseMapper.editCourse(course);
+    public int editCourse(CoursePo coursePo) {
+        return courseMapper.editCourse(coursePo);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourseById(List<String> ids) {
+    public List<CoursePo> getCourseById(List<String> ids) {
         return courseMapper.getCourseById(ids);
     }
 

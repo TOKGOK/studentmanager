@@ -1,6 +1,7 @@
 package com.wdd.studentManager.mapper;
 
 import com.wdd.studentManager.domain.SelectedCourse;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.Map;
  * @Date 2019/6/30 10:56
  * @Created by WDD
  */
+@Mapper
 public interface SelectedCourseMapper {
     List<SelectedCourse> queryList(Map<String, Object> paramMap);
 

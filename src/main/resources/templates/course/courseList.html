@@ -20,7 +20,7 @@
                 collapsible: false,//是否可折叠的
                 fit: true,//自动大小
                 method: "post",
-                url:[[@{/course/getCourseList}]],
+                url:[[@{/coursePo/getCourseList}]],
                 idField:'id',
                 singleSelect: false,//是否单选
                 pagination: true,//分页控件
@@ -139,7 +139,7 @@
 
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/course/editCourse}]],
+                                    url: [[@{/coursePo/editCourse}]],
                                     data: data,
                                     success: function(data){
                                         if(data.success){
@@ -213,7 +213,7 @@
                         if(r){
                             $.ajax({
                                 type: "post",
-                                url: [[@{/course/deleteCourse}]],
+                                url: [[@{/coursePo/deleteCourse}]],
                                 data: jsonObj,
                                 success: function(data){
                                     if(data.message){
@@ -256,7 +256,7 @@
                             } else{
                                 $.ajax({
                                     type: "post",
-                                    url: [[@{/course/addCourse}]],
+                                    url: [[@{/coursePo/addCourse}]],
                                     data: $("#addForm").serialize(),
                                     success: function(data){
                                         if(data.success){

@@ -1,6 +1,6 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Course;
+import com.wdd.studentManager.entity.CoursePo;
 import com.wdd.studentManager.domain.SelectedCourse;
 import com.wdd.studentManager.domain.Student;
 import com.wdd.studentManager.dto.AttendanceDto;
@@ -101,8 +101,8 @@ public class AttendanceController {
         for(SelectedCourse selectedCourse : selectedCourseList){
             ids.add(selectedCourse.getCourseId());
         }
-        List<Course> courseList = courseService.getCourseById(ids);
-        return courseList;
+        List<CoursePo> coursePoList = courseService.getCourseById(ids);
+        return coursePoList;
     }
 
 

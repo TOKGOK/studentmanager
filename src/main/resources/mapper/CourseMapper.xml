@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wdd.studentManager.mapper.CourseMapper">
 
-    <resultMap type="com.wdd.studentManager.domain.Course" id="CourseInfo">
+    <resultMap type="com.wdd.studentManager.entity.CoursePo" id="CourseInfo">
         <result column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="teacher_id" property="teacherId"/>

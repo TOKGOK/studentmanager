@@ -1,6 +1,8 @@
 package com.wdd.studentManager.mapper;
 
-import com.wdd.studentManager.domain.Course;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wdd.studentManager.entity.CoursePo;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -11,22 +13,23 @@ import java.util.Map;
  * @Date 2019/6/29 20:34
  * @Created by WDD
  */
-public interface CourseMapper {
-    List<Course> queryList(Map<String, Object> paramMap);
+@Mapper
+public interface CourseMapper extends BaseMapper<CoursePo> {
+    List<CoursePo> queryList(Map<String, Object> paramMap);
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int addCourse(Course course);
+    int addCourse(CoursePo coursePo);
 
-    int editCourse(Course course);
+    int editCourse(CoursePo coursePo);
 
     int deleteCourse(List<String> ids);
 
-    int addStudentNum(Integer courseId);
+    int addStudentNum(String courseId);
 
-    void deleteStudentNum(Integer courseId);
+    void deleteStudentNum(String courseId);
 
-    List<Course> getCourseById(List<String> ids);
+    List<CoursePo> getCourseById(List<String> ids);
 
     int findByName(String name);
 }

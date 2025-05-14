@@ -49,10 +49,10 @@
                     {field:'courseId',title:'课程',width:200,
                         formatter: function(value,row,index){
                             if (row.courseId){
-                                var courseList = $("#courseList").combobox("getData");
-                                for(var i=0;i<courseList.length;i++ ){
+                                var coursePoList = $("#coursePoList").combobox("getData");
+                                for(var i=0;i<coursePoList.length;i++ ){
                                     //console.log(clazzList[i]);
-                                    if(row.courseId == courseList[i].id)return courseList[i].name;
+                                    if(row.courseId == coursePoList[i].id)return coursePoList[i].name;
                                 }
                                 return row.courseId;
                             } else {
@@ -73,7 +73,7 @@
                 // }
                     preLoadClazz();
                     $("#studentList").combobox("getData");
-                    $("#courseList").combobox("getData");
+                    $("#coursePoList").combobox("getData");
                 }
             });
             //提前加载学生和课程信息
@@ -89,7 +89,7 @@
                     url: [[@{/student/getStudentList(from=combox)}]],
 
                 });
-                $("#courseList").combobox({
+                $("#coursePoList").combobox({
                     width: "80",
                     height: "25",
                     valueField: "id",
@@ -97,7 +97,7 @@
                     multiple: false, //可多选
                     editable: false, //不可编辑
                     method: "post",
-                    url: [[@{/course/getCourseList(from=combox)}]],
+                    url: [[@{/coursePo/getCourseList(from=combox)}]],
 
                 });
             }
@@ -216,7 +216,7 @@
             });
 
             //下拉框通用属性
-            $("#add_courseList,#courseList,#add_typeList").combobox({
+            $("#add_courseList,#coursePoList,#add_typeList").combobox({
                 width: "200",
                 height: "30",
                 valueField: "id",
@@ -252,7 +252,7 @@
 
             //添加信息课程选择框
             $("#add_courseList").combobox({
-                url: [[@{/course/getCourseList(from=combox)}]],
+                url: [[@{/coursePo/getCourseList(from=combox)}]],
                 onLoadSuccess: function(){
                     //默认选择第一条数据
                     var data = $(this).combobox("getData");
@@ -303,7 +303,7 @@
             $("#search-btn").click(function(){
                 $('#dataList').datagrid('load',{
                     studentid: $("#studentList").combobox('getValue') == '' ? 0 : $("#studentList").combobox('getValue'),
-                    courseid: $("#courseList").combobox('getValue') == '' ? 0 : $("#courseList").combobox('getValue'),
+                    courseid: $("#coursePoList").combobox('getValue') == '' ? 0 : $("#coursePoList").combobox('getValue'),
                     type: $("#typeList").combobox('getValue') == '' ? '' : $("#typeList").combobox('getValue'),
                     date:$("#date").datebox('getValue')
                 });
@@ -345,7 +345,7 @@
     <div style="float: left;" class="datagrid-btn-separator"></div>
     <div style="margin-top: 3px;">
         学生：<input id="studentList" class="easyui-textbox" name="studentList" />
-        课程：<input id="courseList" class="easyui-textbox" name="courseList" />
+        课程：<input id="coursePoList" class="easyui-textbox" name="coursePoList" />
         类型：<input id="typeList" class="easyui-textbox" name="typeList" />
         时间：<input id="date" data-options="formatter:myformatter,parser:myparser" class="easyui-datebox" name="date" />
         <a id="search-btn" href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>

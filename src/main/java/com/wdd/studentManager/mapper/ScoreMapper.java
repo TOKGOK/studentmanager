@@ -2,6 +2,7 @@ package com.wdd.studentManager.mapper;
 
 import com.wdd.studentManager.domain.Score;
 import com.wdd.studentManager.domain.ScoreStats;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @Date 2019/7/3 11:47
  * @Created by WDD
  */
+@Mapper
 public interface ScoreMapper {
     List<Score> queryList(Map<String, Object> paramMap);
 

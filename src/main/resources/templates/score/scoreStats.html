@@ -14,7 +14,7 @@
         $(function() {
 
             //提前加载学生和课程信息
-            $("#courseList").combobox({
+            $("#coursePoList").combobox({
                 width: "150",
                 height: "25",
                 valueField: "id",
@@ -22,12 +22,12 @@
                 multiple: false, //可多选
                 editable: false, //不可编辑
                 method: "post",
-                url: [[@{/course/getCourseList(from=combox)}]],
+                url: [[@{/coursePo/getCourseList(from=combox)}]],
             });
 
 
             //下拉框通用属性
-            $("#courseList").combobox({
+            $("#coursePoList").combobox({
                 width: "200",
                 height: "30",
                 valueField: "id",
@@ -40,7 +40,7 @@
             //搜索按钮监听事件
             $(".search-score-btn").click(function(){
                 var searchKey = $(this).attr('key');
-                var courseId = $("#courseList").combobox('getValue');
+                var courseId = $("#coursePoList").combobox('getValue');
                 if(courseId == null || courseId == ''){
                     $.messager.alert("消息提醒","请选择课程!","info");
                     return;
@@ -124,7 +124,7 @@
 <!-- 工具栏 -->
 <div id="toolbar" class="datagrid-toolbar">
     <div style="margin-top: 3px;">
-        课程：<input id="courseList" class="easyui-textbox" name="courseList" />
+        课程：<input id="coursePoList" class="easyui-textbox" name="coursePoList" />
         <a href="javascript:;" class="easyui-linkbutton search-score-btn" key="range" data-options="iconCls:'icon-sum',plain:true">区间统计图</a>
         <a href="javascript:;" class="easyui-linkbutton search-score-btn" key="avg" data-options="iconCls:'icon-sum',plain:true">平均统计图</a>
     </div>
