@@ -265,7 +265,7 @@
                 //添加信息课程选择框
                 var u = [[@{/attendance/getStudentSelectedCourseList}]];
                 $("#add_courseList").combobox({
-                    url:u+"?studentid="+sid,
+                    url:u+"?studentId="+sid,
                     onLoadSuccess: function(){
                         //默认选择第一条数据
                         var data = $(this).combobox("getData");

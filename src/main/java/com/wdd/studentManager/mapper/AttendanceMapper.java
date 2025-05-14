@@ -1,6 +1,9 @@
 package com.wdd.studentManager.mapper;
 
-import com.wdd.studentManager.domain.Attendance;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wdd.studentManager.dto.AttendanceDto;
+import com.wdd.studentManager.entity.AttendancePo;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -11,14 +14,11 @@ import java.util.Map;
  * @Date 2019/7/1 15:49
  * @Created by WDD
  */
-public interface AttendanceMapper {
-    List<Attendance> queryList(Map<String, Object> paramMap);
+@Mapper
+public interface AttendanceMapper extends BaseMapper<AttendancePo> {
+    List<AttendanceDto> queryList(Map<String, Object> paramMap);
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int addAtendance(Attendance attendance);
-
-    Attendance isAttendance(Attendance attendance);
-
-    int deleteAttendance(Integer id);
+    int deleteAttendance(String id);
 }

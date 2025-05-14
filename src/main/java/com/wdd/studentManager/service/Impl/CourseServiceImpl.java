@@ -52,7 +52,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> getCourseById(List<Integer> ids) {
+    public List<Course> getCourseById(List<String> ids) {
         return courseMapper.getCourseById(ids);
     }
 

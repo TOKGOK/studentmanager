@@ -1,9 +1,9 @@
 package com.wdd.studentManager.controller;
 
-import com.wdd.studentManager.domain.Attendance;
 import com.wdd.studentManager.domain.Course;
 import com.wdd.studentManager.domain.SelectedCourse;
 import com.wdd.studentManager.domain.Student;
+import com.wdd.studentManager.dto.AttendanceDto;
 import com.wdd.studentManager.service.AttendanceService;
 import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.service.SelectedCourseService;
@@ -46,8 +46,8 @@ public class AttendanceController {
      * 异步获取考勤列表数据
      * @param page
      * @param rows
-     * @param studentid
-     * @param courseid
+     * @param studentId
+     * @param courseId
      * @param type
      * @param date
      * @param from
@@ -58,14 +58,14 @@ public class AttendanceController {
     @ResponseBody
     public Object getAttendanceList(@RequestParam(value = "page", defaultValue = "1")Integer page,
                                  @RequestParam(value = "rows", defaultValue = "100")Integer rows,
-                                 @RequestParam(value = "studentid", defaultValue = "0")String studentid,
-                                 @RequestParam(value = "courseid", defaultValue = "0")String courseid,
+                                 @RequestParam(value = "studentId", defaultValue = "0")String studentId,
+                                 @RequestParam(value = "courseId", defaultValue = "0")String courseId,
                                  String type,String date, String from, HttpSession session){
-        Map<String,Object> paramMap = new HashMap();
+        Map<String,Object> paramMap = new HashMap<>();
         paramMap.put("pageno",page);
         paramMap.put("pagesize",rows);
-        if(!studentid.equals("0"))  paramMap.put("studentid",studentid);
-        if(!courseid.equals("0"))  paramMap.put("courseid",courseid);
+        if(!studentId.equals("0"))  paramMap.put("studentid", studentId);
+        if(!courseId.equals("0"))  paramMap.put("courseid", courseId);
         if(!StringUtils.isEmpty(type))  paramMap.put("type",type);
         if(!StringUtils.isEmpty(date))  paramMap.put("date",date);
 
@@ -75,7 +75,7 @@ public class AttendanceController {
             //是学生权限，只能查询自己的信息
             paramMap.put("studentid",student.getId());
         }
-        PageBean<Attendance> pageBean = attendanceService.queryPage(paramMap);
+        PageBean<AttendanceDto> pageBean = attendanceService.queryPage(paramMap);
         if(!StringUtils.isEmpty(from) && from.equals("combox")){
             return pageBean.getDatas();
         }else{
@@ -97,7 +97,7 @@ public class AttendanceController {
         //通过学生id 查询 选课信息
         List<SelectedCourse> selectedCourseList = selectedCourseService.getAllBySid(Integer.parseInt(studentid));
         //通过 选课信息中的课程id 查询 学生所选择的课程
-        List<Integer> ids = new ArrayList<>();
+        List<String> ids = new ArrayList<>();
         for(SelectedCourse selectedCourse : selectedCourseList){
             ids.add(selectedCourse.getCourseId());
         }
@@ -113,7 +113,7 @@ public class AttendanceController {
      */
     @PostMapping("/addAttendance")
     @ResponseBody
-    public AjaxResult addAttendance(Attendance attendance){
+    public AjaxResult addAttendance(AttendanceDto attendance){
         AjaxResult ajaxResult = new AjaxResult();
         attendance.setDate(DateFormatUtil.getFormatDate(new Date(),"yyyy-MM-dd"));
         //判断是否已签到
@@ -122,7 +122,7 @@ public class AttendanceController {
             ajaxResult.setSuccess(false);
             ajaxResult.setMessage("已签到，请勿重复签到！");
         }else{
-            int count = attendanceService.addAtendance(attendance);
+            int count = attendanceService.addAttendance(attendance);
             if(count > 0){
                 //签到成功
                 ajaxResult.setSuccess(true);
@@ -142,7 +142,7 @@ public class AttendanceController {
      */
     @PostMapping("/deleteAttendance")
     @ResponseBody
-    public AjaxResult deleteAttendance(Integer id){
+    public AjaxResult deleteAttendance(String id){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = attendanceService.deleteAttendance(id);

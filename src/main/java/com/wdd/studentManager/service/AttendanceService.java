@@ -1,6 +1,8 @@
 package com.wdd.studentManager.service;
 
-import com.wdd.studentManager.domain.Attendance;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.wdd.studentManager.dto.AttendanceDto;
+import com.wdd.studentManager.entity.AttendancePo;
 import com.wdd.studentManager.util.PageBean;
 
 import java.util.Map;
@@ -11,12 +13,12 @@ import java.util.Map;
  * @Date 2019/7/1 15:47
  * @Created by WDD
  */
-public interface AttendanceService {
-    PageBean<Attendance> queryPage(Map<String, Object> paramMap);
+public interface AttendanceService extends IService<AttendancePo> {
+    PageBean<AttendanceDto> queryPage(Map<String, Object> paramMap);
 
-    boolean isAttendance(Attendance attendance);
+    boolean isAttendance(AttendanceDto attendance);
 
-    int addAtendance(Attendance attendance);
+    int addAttendance(AttendanceDto attendance);
 
-    int deleteAttendance(Integer id);
+    int deleteAttendance(String id);
 }

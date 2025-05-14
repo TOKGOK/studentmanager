@@ -21,7 +21,7 @@ public interface CourseService {
 
     int deleteCourse(List<String> ids);
 
-    List<Course> getCourseById(List<Integer> ids);
+    List<Course> getCourseById(List<String> ids);
 
     int findByName(String name);
 }
