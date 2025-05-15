@@ -31,20 +31,6 @@
         </where>
     </select>
 
-
-
-    <delete id="deleteCourse" parameterType="java.util.ArrayList">
-        delete from s_course
-        <where>
-            id in
-            <foreach collection="list" open="(" close=")" separator="," item="id">
-                #{id}
-            </foreach>
-        </where>
-    </delete>
-
-
-
     <update id="addStudentNum" parameterType="int">
          update s_course
          set selected_num = (case
@@ -61,18 +47,7 @@
          where id = #{courseId}
     </update>
 
-    <select id="getCourseById" parameterType="java.util.List" resultType="Course">
-        select *
-        from s_course
-        <where>
-            id in
-            <foreach collection="list" open="(" close=")" separator="," item="id">
-                #{id}
-            </foreach>
-        </where>
-    </select>
-
-    <select id="findByName" parameterType="java.lang.String" resultType="int">
+    <select id="findByName" parameterType="java.lang.String" resultType="String">
         select id from s_course where name = #{name}
     </select>
 

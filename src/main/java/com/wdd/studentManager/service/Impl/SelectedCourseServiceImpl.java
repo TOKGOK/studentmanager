@@ -1,5 +1,7 @@
 package com.wdd.studentManager.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wdd.studentManager.dto.SelectedCourseDto;
 import com.wdd.studentManager.entity.SelectedCoursePo;
@@ -8,10 +10,12 @@ import com.wdd.studentManager.mapper.SelectedCourseMapper;
 import com.wdd.studentManager.service.SelectedCourseService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +68,7 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
 
     @Override
     @Transactional
-    public int deleteSelectedCourse(Integer id) {
+    public int deleteSelectedCourse(String id) {
         SelectedCourseDto selectedCourseDto = selectedCourseMapper.findById(id);
         courseMapper.deleteStudentNum(selectedCourseDto.getCourseId());
         return selectedCourseMapper.deleteSelectedCourse(id);
@@ -72,16 +76,20 @@ public class SelectedCourseServiceImpl extends ServiceImpl<SelectedCourseMapper,
 
     @Override
     public boolean isStudentId(String id) {
-        List<SelectedCourseDto> selectedCourseDtoList = selectedCourseMapper.isStudentId(id);
-        if (selectedCourseDtoList.isEmpty()){
-            return true;
-        }else{
-            return false;
-        }
+        LambdaQueryWrapper<SelectedCoursePo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(SelectedCoursePo::getStudentId,id);
+        List<SelectedCoursePo> selectedCoursePoList = selectedCourseMapper.selectList(queryWrapper);
+        return selectedCoursePoList.size() > 0;
     }
 
     @Override
-    public List<SelectedCourseDto> getAllBySid(int studentId) {
-        return selectedCourseMapper.getAllBySid(studentId);
+    public List<SelectedCourseDto> getAllBySid(String studentId) {
+        LambdaQueryWrapper<SelectedCoursePo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(SelectedCoursePo::getStudentId,studentId);
+        List<SelectedCoursePo> selectedCoursePoList = selectedCourseMapper.selectList(queryWrapper);
+        List<SelectedCourseDto> selectedCourseDtoList = new ArrayList<>();
+        BeanUtils.copyProperties(selectedCoursePoList,selectedCourseDtoList);
+        return selectedCourseDtoList;
+
     }
 }

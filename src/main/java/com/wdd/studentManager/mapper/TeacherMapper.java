@@ -19,16 +19,4 @@ public interface TeacherMapper extends BaseMapper<TeacherPo> {
     List<TeacherDto> queryList(Map<String, Object> paramMap);
 
     Integer queryCount(Map<String, Object> paramMap);
-
-    int deleteTeacher(List<String> ids);
-
-    int addTeacher(TeacherDto teacherDto);
-
-    TeacherDto findById(String tid);
-
-    int editTeacher(TeacherDto teacherDto);
-
-    TeacherDto findByTeacher(TeacherDto teacherDto);
-
-    int editPswdByTeacher(TeacherDto teacherDto);
 }

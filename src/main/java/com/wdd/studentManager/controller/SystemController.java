@@ -258,7 +258,7 @@ public class SystemController {
             }
             studentDto.setPassword(newpassword);
             try{
-                int count = studentService.editPswdByStudent(studentDto);
+                int count = studentService.editPasswordByStudent(studentDto);
                 if(count > 0){
                     ajaxResult.setSuccess(true);
                     ajaxResult.setMessage("修改成功,请重新登录");
@@ -282,7 +282,7 @@ public class SystemController {
             }
             teacherDto.setPassword(newpassword);
             try{
-                int count = teacherService.editPswdByTeacher(teacherDto);
+                int count = teacherService.editPasswordByTeacher(teacherDto);
                 if(count > 0){
                     ajaxResult.setSuccess(true);
                     ajaxResult.setMessage("修改成功,请重新登录");

@@ -27,49 +27,8 @@
         </where>
     </select>
 
-    <insert id="addLeave" parameterType="Leave">
-        insert into s_leave(student_id,info)
-        values(#{studentId},#{info})
-    </insert>
-
-    <delete id="deleteLeave" parameterType="int">
-        delete from s_leave where id = #{id}
-    </delete>
-
-    <update id="editLeave" parameterType="Leave">
-        update s_leave set student_id = #{studentId},info = #{info} where id = #{id}
-    </update>
-
-    <update id="checkLeave" parameterType="Leave">
+    <update id="checkLeave" parameterType="com.wdd.studentManager.dto.LeaveDto">
         update s_leave set student_id = #{studentId},info = #{info},status = #{status},remark = #{remark} where id = #{id}
     </update>
-
-<!--    <update id="addStudentNum" parameterType="int">-->
-<!--         update s_course-->
-<!--         set selected_num = (case-->
-<!--            when selected_num = max_num then 50-->
-<!--            when selected_num &lt; max_num then selected_num+1-->
-<!--            end-->
-<!--         )-->
-<!--         where id = #{courseId}-->
-<!--    </update>-->
-
-<!--    <update id="deleteStudentNum" parameterType="int">-->
-<!--         update s_course-->
-<!--         set selected_num = selected_num-1-->
-<!--         where id = #{courseId}-->
-<!--    </update>-->
-
-<!--    <select id="getCourseById" parameterType="java.util.List" resultType="Course">-->
-<!--        select *-->
-<!--        from s_course-->
-<!--        <where>-->
-<!--            id in-->
-<!--            <foreach collection="list" open="(" close=")" separator="," item="id">-->
-<!--                #{id}-->
-<!--            </foreach>-->
-<!--        </where>-->
-<!--    </select>-->
-
 
 </mapper>

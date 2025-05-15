@@ -20,19 +20,4 @@ public interface StudenetMapper extends BaseMapper<StudentPo> {
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int deleteStudent(List<String> ids);
-
-    int addStudent(StudentDto studentDto);
-
-    StudentDto findById(String sid);
-
-    int editStudent(StudentDto studentDto);
-
-    StudentDto findByStudent(StudentDto studentDto);
-
-    List<StudentDto> isStudentByClazzId(String id);
-
-    int editPswdByStudent(StudentDto studentDto);
-
-    int findByName(String name);
 }

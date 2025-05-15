@@ -161,7 +161,7 @@ public class ScoreController {
      */
     @PostMapping("/deleteScore")
     @ResponseBody
-    public AjaxResult deleteScore(Integer id){
+    public AjaxResult deleteScore(String id){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = scoreService.deleteScore(id);
@@ -225,8 +225,8 @@ public class ScoreController {
 
                 //将学生，课程转换为id,存入数据库
                 // 1)首先获取对应的id
-                int studentId = studentService.findByName(row.getCell(0).getStringCellValue());
-                int courseId = courseService.findByName(row.getCell(1).getStringCellValue());
+                String studentId = studentService.findByName(row.getCell(0).getStringCellValue());
+                String courseId = courseService.findCourseIdByName(row.getCell(1).getStringCellValue());
                 // 2)判断是否已存在数据库中
                 ScoreDto scoreDto = new ScoreDto();
                 scoreDto.setStudentId(studentId);
@@ -322,7 +322,7 @@ public class ScoreController {
      */
     @RequestMapping("/getScoreStatsList")
     @ResponseBody
-    public Object getScoreStatsList(@RequestParam(value = "courseid", defaultValue = "0")Integer courseid,
+    public Object getScoreStatsList(@RequestParam(value = "courseid", defaultValue = "0")String courseid,
                                         String searchType){
         AjaxResult ajaxResult = new AjaxResult();
         if(searchType.equals("avg")){

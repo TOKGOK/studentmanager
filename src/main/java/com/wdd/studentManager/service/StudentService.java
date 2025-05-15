@@ -29,7 +29,7 @@ public interface StudentService extends IService<StudentPo> {
 
     boolean isStudentByClazzId(String next);
 
-    int editPswdByStudent(StudentDto studentDto);
+    int editPasswordByStudent(StudentDto studentDto);
 
-    int findByName(String username);
+    String findByName(String username);
 }

@@ -7,6 +7,7 @@ import com.wdd.studentManager.mapper.LeaveMapper;
 import com.wdd.studentManager.service.LeaveService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,22 +31,26 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, LeavePo> implemen
 
         Integer startIndex = pageBean.getStartIndex();
         paramMap.put("startIndex",startIndex);
-        List<LeaveDto> datas = leaveMapper.queryList(paramMap);
-        pageBean.setDatas(datas);
+        List<LeaveDto> data = leaveMapper.queryList(paramMap);
+        pageBean.setDatas(data);
 
-        Integer totalsize = leaveMapper.queryCount(paramMap);
-        pageBean.setTotalsize(totalsize);
+        Integer totalSize = leaveMapper.queryCount(paramMap);
+        pageBean.setTotalsize(totalSize);
         return pageBean;
     }
 
     @Override
     public int addLeave(LeaveDto leaveDto) {
-        return leaveMapper.addLeave(leaveDto);
+        LeavePo leavePo = new LeavePo();
+        BeanUtils.copyProperties(leaveDto,leavePo);
+        return save(leavePo) ? 1 : 0;
     }
 
     @Override
     public int editLeave(LeaveDto leaveDto) {
-        return leaveMapper.editLeave(leaveDto);
+        LeavePo leavePo = new LeavePo();
+        BeanUtils.copyProperties(leaveDto,leavePo);
+        return saveOrUpdate(leavePo) ? 1 : 0;
     }
 
     @Override
@@ -54,7 +59,7 @@ public class LeaveServiceImpl extends ServiceImpl<LeaveMapper, LeavePo> implemen
     }
 
     @Override
-    public int deleteLeave(Integer id) {
-        return leaveMapper.deleteLeave(id);
+    public int deleteLeave(String id) {
+        return removeById(id) ? 1 : 0;
     }
 }

@@ -22,5 +22,5 @@ public interface LeaveService extends IService<LeavePo> {
 
     int checkLeave(LeaveDto leaveDto);
 
-    int deleteLeave(Integer id);
+    int deleteLeave(String id);
 }

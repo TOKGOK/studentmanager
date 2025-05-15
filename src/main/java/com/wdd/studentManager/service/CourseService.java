@@ -25,5 +25,5 @@ public interface CourseService extends IService<CoursePo> {
 
     List<CourseDto> getCourseById(List<String> ids);
 
-    int findByName(String name);
+    String findCourseIdByName(String name);
 }

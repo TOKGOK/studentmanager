@@ -29,32 +29,23 @@
         </where>
     </select>
 
-    <insert id="addSelectedCourse" parameterType="SelectedCourse">
+    <insert id="addSelectedCourse" parameterType="com.wdd.studentManager.dto.SelectedCourseDto">
         insert into s_selected_course(student_id,course_id)
         values(#{studentId},#{courseId})
     </insert>
 
-    <delete id="deleteSelectedCourse" parameterType="int">
+    <delete id="deleteSelectedCourse" parameterType="String">
         delete from s_selected_course where id = #{id}
     </delete>
 
-    <select id="findById" parameterType="int" resultMap="SelectedCourseInfo" >
+    <select id="findById" parameterType="String" resultMap="SelectedCourseInfo" >
         select  * from s_selected_course where id = #{id}
     </select>
 
 
-    <select id="findBySelectedCourse" parameterType="SelectedCourse" resultMap="SelectedCourseInfo" >
+    <select id="findBySelectedCourse" parameterType="com.wdd.studentManager.dto.SelectedCourseDto" resultMap="SelectedCourseInfo" >
         select * from s_selected_course
         where student_id = #{studentId} and course_id = #{courseId}
     </select>
 
-    <select id="isStudentId" parameterType="int" resultMap="SelectedCourseInfo" >
-        select * from s_selected_course
-        where student_id = #{id}
-    </select>
-
-    <select id="getAllBySid" parameterType="int" resultMap="SelectedCourseInfo" >
-        select * from s_selected_course
-        where student_id = #{studentid}
-    </select>
 </mapper>

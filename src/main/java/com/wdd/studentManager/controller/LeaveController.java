@@ -148,7 +148,7 @@ public class LeaveController {
      */
     @PostMapping("/deleteLeave")
     @ResponseBody
-    public AjaxResult deleteLeave(Integer id){
+    public AjaxResult deleteLeave(String id){
         AjaxResult ajaxResult = new AjaxResult();
         try {
             int count = leaveService.deleteLeave(id);

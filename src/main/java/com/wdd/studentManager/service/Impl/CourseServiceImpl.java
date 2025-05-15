@@ -1,5 +1,7 @@
 package com.wdd.studentManager.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wdd.studentManager.dto.CourseDto;
 import com.wdd.studentManager.entity.CoursePo;
@@ -8,11 +10,12 @@ import com.wdd.studentManager.service.CourseService;
 import com.wdd.studentManager.util.PageBean;
 import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Classname CourseServiceImpl
@@ -56,16 +59,27 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper,CoursePo> implem
 
     @Override
     public int deleteCourse(List<String> ids) {
-        return courseMapper.deleteCourse(ids);
+        AtomicInteger count = new AtomicInteger();
+        ids.forEach(id->{
+            if(removeById(id)){
+                count.getAndIncrement();
+            }
+        });
+        return count.get();
     }
 
     @Override
     public List<CourseDto> getCourseById(List<String> ids) {
-        return courseMapper.getCourseById(ids);
+        LambdaQueryWrapper<CoursePo> wrapper = Wrappers.lambdaQuery();
+        wrapper.in(CoursePo::getId,ids);
+        List<CoursePo> coursePos = courseMapper.selectList(wrapper);
+        List<CourseDto> courseDtoList = new ArrayList<>();
+        BeanUtils.copyProperties(coursePos,courseDtoList);
+        return courseDtoList;
     }
 
     @Override
-    public int findByName(String name) {
+    public String findCourseIdByName(String name) {
         return courseMapper.findByName(name);
     }
 

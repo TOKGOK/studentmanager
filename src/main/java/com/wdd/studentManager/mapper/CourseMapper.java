@@ -20,13 +20,9 @@ public interface CourseMapper extends BaseMapper<CoursePo> {
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int deleteCourse(List<String> ids);
-
     int addStudentNum(String courseId);
 
     void deleteStudentNum(String courseId);
 
-    List<CourseDto> getCourseById(List<String> ids);
-
-    int findByName(String name);
+    String findByName(String name);
 }

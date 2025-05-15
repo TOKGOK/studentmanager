@@ -19,9 +19,9 @@ public interface SelectedCourseService extends IService<SelectedCoursePo> {
 
     int addSelectedCourse(SelectedCourseDto selectedCourseDto);
 
-    int deleteSelectedCourse(Integer id);
+    int deleteSelectedCourse(String id);
 
     boolean isStudentId(String id);
 
-    List<SelectedCourseDto> getAllBySid(int studentId);
+    List<SelectedCourseDto> getAllBySid(String studentId);
 }

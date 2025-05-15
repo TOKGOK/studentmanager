@@ -21,15 +21,7 @@ public interface ScoreMapper extends BaseMapper<ScorePo> {
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int addScore(ScoreDto scoreDto);
-
-    ScoreDto isScore(ScoreDto scoreDto);
-
-    int editScore(ScoreDto scoreDto);
-
-    int deleteScore(Integer id);
-
     List<ScoreDto> getAll(ScoreDto scoreDto);
 
-    ScoreStatsDto getAvgStats(Integer courseid);
+    ScoreStatsDto getAvgStats(String courseid);
 }

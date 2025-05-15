@@ -109,7 +109,7 @@ public class SelectedCourseController {
      */
     @PostMapping("/deleteSelectedCourse")
     @ResponseBody
-    public AjaxResult deleteSelectedCourse(Integer id){
+    public AjaxResult deleteSelectedCourse(String id){
         AjaxResult ajaxResult = new AjaxResult();
 
         try {

@@ -24,11 +24,7 @@ public interface SelectedCourseMapper extends BaseMapper<SelectedCoursePo> {
 
     SelectedCourseDto findBySelectedCourse(SelectedCourseDto selectedCourseDto);
 
-    SelectedCourseDto findById(Integer id);
+    SelectedCourseDto findById(String id);
 
-    int deleteSelectedCourse(Integer id);
-
-    List<SelectedCourseDto> isStudentId(String id);
-
-    List<SelectedCourseDto> getAllBySid(int studentId);
+    int deleteSelectedCourse(String id);
 }

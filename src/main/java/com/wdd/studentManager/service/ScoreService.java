@@ -24,9 +24,9 @@ public interface ScoreService extends IService<ScorePo> {
 
     int editScore(ScoreDto scoreDto);
 
-    int deleteScore(Integer id);
+    int deleteScore(String id);
 
     List<ScoreDto> getAll(ScoreDto scoreDto);
 
-    ScoreStatsDto getAvgStats(Integer courseid);
+    ScoreStatsDto getAvgStats(String courseid);
 }

@@ -27,5 +27,5 @@ public interface TeacherService extends IService<TeacherPo> {
 
     TeacherDto findByTeacher(TeacherDto teacherDto);
 
-    int editPswdByTeacher(TeacherDto teacherDto);
+    int editPasswordByTeacher(TeacherDto teacherDto);
 }

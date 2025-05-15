@@ -20,11 +20,6 @@ public interface LeaveMapper extends BaseMapper<LeavePo> {
 
     Integer queryCount(Map<String, Object> paramMap);
 
-    int addLeave(LeaveDto leaveDto);
-
-    int editLeave(LeaveDto leaveDto);
-
     int checkLeave(LeaveDto leaveDto);
 
-    int deleteLeave(Integer id);
 }
