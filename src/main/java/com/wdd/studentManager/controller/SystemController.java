@@ -193,12 +193,12 @@ public class SystemController {
         AjaxResult ajaxResult = new AjaxResult();
         if(sid != null){
             StudentDto studentDto = studentService.findById(sid);
-            ajaxResult.setImgurl(studentDto.getPhoto());
+            ajaxResult.setImgUrl(studentDto.getPhoto());
             return ajaxResult;
         }
         if(tid != null){
             TeacherDto teacherDto = teacherService.findById(tid);
-            ajaxResult.setImgurl(teacherDto.getPhoto());
+            ajaxResult.setImgUrl(teacherDto.getPhoto());
             return ajaxResult;
         }
 

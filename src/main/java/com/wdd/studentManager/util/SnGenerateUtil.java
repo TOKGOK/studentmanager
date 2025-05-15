@@ -8,12 +8,12 @@ package com.wdd.studentManager.util;
  */
 public class SnGenerateUtil {
     public static String generateSn(String clazzId){
-        String sn = "";
+        String sn;
         sn = "S" + clazzId + System.currentTimeMillis();
         return sn;
     }
     public static String generateTeacherSn(String clazzId){
-        String sn = "";
+        String sn;
         sn = "T" + clazzId + System.currentTimeMillis();
         return sn;
     }

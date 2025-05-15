@@ -116,7 +116,7 @@ public class AttendanceController {
     @ResponseBody
     public AjaxResult addAttendance(AttendanceDto attendance){
         AjaxResult ajaxResult = new AjaxResult();
-        attendance.setDate(DateFormatUtil.getFormatDate(new Date(),"yyyy-MM-dd"));
+        attendance.setDate(DateFormatUtil.getFormatDate());
         //判断是否已签到
         if(attendanceService.isAttendance(attendance)){
             //true为已签到

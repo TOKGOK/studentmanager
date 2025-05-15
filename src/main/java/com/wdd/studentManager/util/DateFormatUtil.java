@@ -10,8 +10,14 @@ import java.util.Date;
  * @Created by WDD
  */
 public class DateFormatUtil {
-    public static String getFormatDate(Date date, String format){
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    public static String getFormatDate(Date date){
         return sdf.format(date);
+    }
+
+    public static String getFormatDate(){
+        return getFormatDate(new Date());
     }
 }
