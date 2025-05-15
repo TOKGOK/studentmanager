@@ -13,5 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
+    @GetMapping("/list")
+    public String list(){
+        return "/admin/admin_list";
+    }
 }

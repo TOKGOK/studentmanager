@@ -1,5 +1,6 @@
 package com.wdd.studentManager.controller;
 
+import com.wdd.studentManager.dto.LoginDto;
 import com.wdd.studentManager.dto.StudentDto;
 import com.wdd.studentManager.dto.TeacherDto;
 import com.wdd.studentManager.dto.AdminDto;
@@ -54,8 +55,12 @@ public class SystemController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public AjaxResult submitlogin(String username, String password, String code, String type,
-                                  HttpSession session){
+    public AjaxResult submitLogin(@RequestBody LoginDto loginDto){
+        String username = loginDto.getUsername();
+        String password = loginDto.getPassword();
+//        String code = loginDto.getCode();
+        String type = loginDto.getType();
+//        HttpSession session = loginDto.getSession();
         AjaxResult ajaxResult = new AjaxResult();
         if(StringUtils.isEmpty(username)){
             ajaxResult.setSuccess(false);
@@ -67,22 +72,22 @@ public class SystemController {
             ajaxResult.setMessage("请填写密码");
             return ajaxResult;
         }
-        if(StringUtils.isEmpty(code)){
-            ajaxResult.setSuccess(false);
-            ajaxResult.setMessage("请填验证码");
-            return ajaxResult;
-        }
-        if(StringUtils.isEmpty(session.getAttribute(Const.CODE))){
-            ajaxResult.setSuccess(false);
-            ajaxResult.setMessage("会话时间过长，请刷新");
-            return ajaxResult;
-        }else{
-            if(!code.equalsIgnoreCase((String) session.getAttribute(Const.CODE))){
-                ajaxResult.setSuccess(false);
-                ajaxResult.setMessage("验证码错误");
-                return ajaxResult;
-            }
-        }
+//        if(StringUtils.isEmpty(code)){
+//            ajaxResult.setSuccess(false);
+//            ajaxResult.setMessage("请填验证码");
+//            return ajaxResult;
+//        }
+//        if(StringUtils.isEmpty(session.getAttribute(Const.CODE))){
+//            ajaxResult.setSuccess(false);
+//            ajaxResult.setMessage("会话时间过长，请刷新");
+//            return ajaxResult;
+//        }else{
+//            if(!code.equalsIgnoreCase((String) session.getAttribute(Const.CODE))){
+//                ajaxResult.setSuccess(false);
+//                ajaxResult.setMessage("验证码错误");
+//                return ajaxResult;
+//            }
+//        }
         //数据库校验
         switch (type){
             case "1":{ //管理员
@@ -96,8 +101,8 @@ public class SystemController {
                     return ajaxResult;
                 }
                 ajaxResult.setSuccess(true);
-                session.setAttribute(Const.ADMIN,ad);
-                session.setAttribute(Const.USERTYPE,"1");
+//                session.setAttribute(Const.ADMIN,ad);
+//                session.setAttribute(Const.USERTYPE,"1");
                 break;
             }
             case "2":{
@@ -111,8 +116,8 @@ public class SystemController {
                     return ajaxResult;
                 }
                 ajaxResult.setSuccess(true);
-                session.setAttribute(Const.STUDENT,st);
-                session.setAttribute(Const.USERTYPE,"2");
+//                session.setAttribute(Const.STUDENT,st);
+//                session.setAttribute(Const.USERTYPE,"2");
                 break;
             }
             case "3":{
@@ -126,8 +131,8 @@ public class SystemController {
                     return ajaxResult;
                 }
                 ajaxResult.setSuccess(true);
-                session.setAttribute(Const.TEACHER,tr);
-                session.setAttribute(Const.USERTYPE,"3");
+//                session.setAttribute(Const.TEACHER,tr);
+//                session.setAttribute(Const.USERTYPE,"3");
                 break;
             }
         }
